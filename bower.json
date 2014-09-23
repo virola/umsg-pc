@@ -1,0 +1,25 @@
+{
+  "name": "zhitiao.94uv.com",
+  "version": "0.1.0",
+  "authors": [
+    "Virola <virola.zhu@gmail.com>"
+  ],
+  "description": "message",
+  "moduleType": [
+    "amd"
+  ],
+  "ignore": [
+    ".jshintrc"
+  ],
+  "keywords": [
+    "amd"
+  ],
+  "license": "MIT",
+  "homepage": "www.94uv.com",
+  "private": true,
+  "devDependencies": {
+    "jquery": "~1.11.1",
+    "est": "https://github.com/ecomfe/est.git",
+    "font-awesome": "~4.1.0"
+  }
+}
