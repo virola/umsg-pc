@@ -1,0 +1,133 @@
+@em-color: #00a0b0;
+
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    background: #000;
+    .opacity(30);
+    display: none;
+}
+.popup {
+    position: absolute;
+    display: none;
+    z-index: 10001;
+    background-color: #fff;
+
+    .close {
+        position: absolute;
+        .size(16px);
+        right: 10px;
+        top: 5px;
+        color: #999;
+        cursor: pointer;
+
+        &-hover {
+            color: @em-color;
+        }
+    }
+}
+.popup-title {
+    background: #f2f2f2;
+    height: 30px;
+    line-height: 30px;
+    font-weight: 700;
+    padding: 0 0 0 20px;
+    vertical-align: middle;
+}
+.popup-content {
+    padding: 20px;
+}
+
+
+
+.btn-s .loading, .btn-s-disable .loading {
+    background: url('../img/common/loading.gif?v=2014') no-repeat;
+    float: left;
+    width: 15px;
+    height: 15px;
+    margin: 2px 4px 0 0;
+    _margin-right: 0;
+}
+
+.btn-noloading .loading {
+    display: none;
+}
+
+
+.msg-form {
+    .num {
+        float: right;
+        font-size: 12px;
+        color: #999;
+    }
+
+    .textbox, .inputbox {
+        border-radius: 2px;
+        border: 1px solid #e8e8e8;
+
+        &:focus {
+            border-color: @em-color;
+        }
+    }
+
+    .inputbox {
+        margin-bottom: 5px;
+        padding: 2px;
+        box-shadow: 0px 1px 1px 0px #eaeaea inset;
+        line-height: 17px;
+
+        .btn-deltags {
+            margin: 1px 2px 1px 0;
+        }
+    }
+    .inputbox-focus {
+        border-color: #00a0b0;
+    }
+
+    .input {
+        border: 0;
+        box-shadow: none;
+        padding: 2px 0;
+        color: #666;
+        height: 16px;
+        width: 175px;
+    }
+
+    .textbox {
+        padding: 3px;
+        width: 327px;
+        clear: both;
+        height: 42px;
+        overflow: auto;
+    }
+
+    .form-line {
+        margin-bottom: 5px;
+    }
+
+    .form-label {
+        padding: 3px 0;
+        color: #444;
+        width: 55px;
+        text-align: right;
+        line-height: 24px;
+        white-space: nowrap;
+    }
+
+    .form-item {
+        width: 390px - 55px;
+    }
+
+}
+
+.btn-deltags {
+    display: inline-block;
+    padding: 1px 4px 3px 6px;
+    height: 16px;
+    line-height: 17px;
+    _font-family: 'SimSun';
+    background-color: #E5F1F5;
+    border-radius: 2px;
+}

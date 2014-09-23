@@ -1,0 +1,85 @@
+@import '../../dep/est/src/all';
+@default-font-size: 14px;
+.global-reset();
+
+@main-color: #00a0b0;
+@link-color: #026890;
+@link-color-sub: #00a0b0;
+
+body {
+    font: 14px/1.6 "Merriweather Sans", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+img {
+    border: none;
+}
+textarea {
+    resize: none;
+}
+input[type="text"], input[type="password"], input[type="button"], input[type="submit"], input[type="reset"], textarea {
+    outline-style: none;
+    -webkit-appearance: none;
+    font-size: 14px;
+}
+a {
+    outline: none;
+    text-decoration: none;
+    color: @link-color;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+em, i, strong, b {
+    font-weight: 400;
+    font-style: normal;
+}
+
+.btn {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    margin: 0;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-weight: normal;
+    line-height: 1.5;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.btn-primary {
+    background: @main-color;
+    color: #fff;
+}
+
+// for layout
+.hide {
+    display: none;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+
+.clear {
+    .clearfix();
+}
+
+.w980 {
+    margin: 0 auto;
+    clear: both;
+    width: 990px;
+}
+.mt20 {
+    margin-top: 20px;
+}
+.wrap {
+    padding-bottom: 25px;
+}

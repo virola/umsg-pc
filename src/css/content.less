@@ -1,0 +1,213 @@
+@link-hover-color: #00a0b0;
+
+.main {
+    border: 1px solid #DFDFDF;
+    min-height: 300px;
+    background: url(../img/repeat_bg_y_green.png) repeat-y -13px 0;
+    background-color: #fafafa;
+
+    .ct {
+        margin-right: 20px;
+        padding-top: 10px;
+        width: 800px;
+        float: right;
+    }
+
+
+    .side {
+        float: left;
+        overflow: hidden;
+        margin-bottom: 10px;
+        width: 137px;
+    }
+}
+.operation {
+    margin: 10px;
+    line-height: 30px;
+
+    a {
+        line-height: 30px;
+    }
+}
+
+.appl {
+    margin-top: 20px;
+
+    @side-li-height: 40px;
+
+    li {
+        display: block;
+        white-space: nowrap;
+        word-wrap: normal;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        margin: 0 10px;
+        height: @side-li-height;
+        border-bottom: 1px dashed #CCC;
+
+        &.current {
+            margin: -1px 0 0;
+            padding: 0 10px 0 9px;
+            border-bottom: 1px solid #dfdfdf;
+            border-top: 1px solid #dfdfdf;
+            background: #fafafa;
+        }
+
+        .notice-pm {
+            margin-top: 11px;
+        }
+
+        a {
+            display: block;
+            height: @side-li-height;
+            line-height: @side-li-height;
+            color: #333;
+            font-size: 16px;
+
+            &:hover {
+                color: @link-hover-color;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.msg-list {
+
+    .msg-list-item {
+        cursor: pointer;
+    }
+
+    dl {
+        position: relative;
+        padding: 10px 10px 10px 0;
+        border-bottom: 1px solid #eee;
+
+        &:hover {
+            background-color: #fff;
+        }
+    }
+
+    .item-hover {
+        background-color: #fff;
+    }
+
+    .plus {
+        position: absolute;
+        right: 10px;
+        top: 12px;
+        font-size: 12px;
+        color: #808080;
+
+        .dateline {
+
+        }
+
+        .bubble {
+            position: absolute;
+            top: 26px;
+            right: 0;
+            padding: 0 2px;
+            font-family: arial;
+            font-size: 12px;
+            -webkit-transform: scale(0.875);
+            background-color: #dd3838;
+            color: #fff;
+            border-radius: 2px;
+            min-width: 11px;
+            _width: 11px;
+            height: 12px;
+            line-height: 14px;
+            text-align: center;
+        }
+
+        .operate {
+            display: inline-block;
+            .size(12px);
+            margin-left: 5px;
+            padding: 2px;
+            border: 1px solid #ccc;
+            .border-radius(2px);
+            line-height: 1;
+            text-align: center;
+            color: #999;
+
+            &:hover {
+                background-color: @link-hover-color;
+                color: #fff;
+            }
+        }
+    }
+
+    .operate-list {
+        position: absolute;
+        z-index: 1000;
+        top: 29px;
+        right: 10px;
+        font-size: 12px;
+    }
+
+    .list-check {
+        width: 20px;
+        height: 20px;
+
+        input {
+            margin: 10px 5px 0 0;
+        }
+    }
+
+    .user-avator {
+        width: 60px;
+
+        img {
+            display: block;
+            .size(50px);
+            .border-radius(2px);
+            padding: 2px;
+            background: #FFF;
+            border: 1px solid;
+            border-color: #F2F2F2 #EEE #EEE #F2F2F2;
+        }
+    }
+    .user-info {
+        width: 780px - 80px;
+
+        .username {
+            font-weight: 700;
+        }
+        .msg-text {
+            line-height: 30px;
+            color: #808080;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            margin-right: 2em;
+        }
+    }
+
+}
+
+.layer-menu-list {
+    background: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 1px;
+
+    li a {
+        white-space: nowrap;
+        min-width: 36px;
+        padding: 8px 10px;
+        color: #333;
+        line-height: 1;
+        display: block;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #e6e6e6;
+            text-decoration: none;
+        }
+    }
+}
+
+
