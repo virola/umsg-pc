@@ -50,7 +50,7 @@ $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/
                 <a class="btn btn-primary" href="javascript:;" id="btn-del-confirm">确定</a>
                 <a class="btn btn-primary" href="javascript:;" id="btn-del-cancel">取消</a>
             </div>
-            <div class="msg-list">
+            <div class="msg-list checkbox-list">
                 <?php foreach ($msg_arr as $msg) { ?>
                 <dl data-url="show.php?uid=<?php echo $msg['userid'] ?>" class="msg-list-item clear">
                     <dd class="list-check fl">
@@ -83,7 +83,7 @@ $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/
         <aside class="side">
             <div class="appl">
                 <ul>
-                    <li class="fixed current"><em class="notice-pm"></em><a href="#">纸条列表</a></li>
+                    <li class="fixed current"><a href="#"><em class="notice-pm"></em>纸条列表</a></li>
                 </ul>
             </div>
         </aside>

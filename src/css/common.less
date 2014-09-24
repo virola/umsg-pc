@@ -12,8 +12,18 @@ body {
     padding: 0;
     color: #333;
 }
-img {
+img, fieldset {
     border: none;
+}
+fieldset {
+    display: block;
+    padding: 0 0 0 20px;
+    border-style: solid;
+    border-width: 1px 0 0 0;
+}
+fieldset legend {
+    padding: 0 5px;
+    font-weight: bold;
 }
 textarea {
     resize: none;
@@ -137,4 +147,9 @@ em, i, strong, b {
     &-info {
         border-left-color: #5bc0de;
     }
+}
+
+.block-ico {
+    color: #ea1429;
+    margin-right: 5px;
 }

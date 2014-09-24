@@ -36,17 +36,19 @@ if ($result) {
     while($row = mysql_fetch_array($result)) {
         $issend = ($row['authorid'] == $targetid ? false : true);
         $msg_arr[] = array(
+            'pmid' => $row['pmid'],
             'userid' => $row['authorid'],
             'username' => $row['username'],
             'content' => $row['content'],
-            'dateline' => date('m-d H:i', $row['dateline']),
+            'dateline' => timeFormatPC($row['dateline']),
             'issend' => $issend,
             'avator' => ($issend ? $user['avator'] : $tuser['avator']),
         );
     }
-
-    $msg_arr = array_reverse($msg_arr);
 }
+
+$project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/';
+
 ?>
 
 <!DOCTYPE html>
@@ -60,33 +62,66 @@ if ($result) {
 <body>
 
 <?php include('./common/header.php') ?>
-<div class="page">
+<div class="page page-chat">
     <div class="feed-loading hide"><span>加载中…</span></div>
-    
     <div class="main clear">
 
-        <div id="page-chat" class="ct">
-                <ul id="talk-msg-list" class="talk-msg" data-url="ajax/msglist.php?uid=<?php echo $targetid?>">
-                    <?php foreach ($msg_arr as $msg) { ?>
-                    <li class="clear">
-                        <time class="date-talk"><?php echo $msg['dateline']?></time>
-                        <section class="<?php if ($msg['issend']){echo 'me-talk';} else {echo 'guest-talk';} ?>">
-                            <a class="avatar-talk" href="#" title="">
-                                <img class="avator-round" src="<?php echo $msg['avator']?>">
-                            </a>
-                            <div class="content-talk">
-                                <p><?php echo $msg['content']?></p>
+        <div id="page-chat" class="ct chat-ct">
+            <h3 class="title">与 <strong><?php echo $tuser['username'] ?></strong> 的对话</h3>
+
+            <div class="operation clear">
+                <a class="btn btn-default" href="javascript:;" id="btn-batch-del">批量删除</a>
+                <a class="btn btn-default fr" href="javascript:;" id="btn-blackuser"><i class="fa fa-minus-circle block-ico"></i>屏蔽用户</a>
+            </div>
+            <div class="operation-del hide clear">
+                <label for="delete-all" class="delete-all"><input type="checkbox" name="chkall" id="delete-all" class="checkbox">全选</label>
+                <a class="btn btn-primary" href="javascript:;" id="btn-del-confirm">确定</a>
+                <a class="btn btn-primary" href="javascript:;" id="btn-del-cancel">取消</a>
+            </div>
+
+            <div class="msg-form">
+                <p class="msg-form-text">写纸条给： <strong><?php echo $tuser['username'] ?></strong></p>
+                <form id="chat-sendmsg-form" action="ajax/newmessage.php?toid=<?php echo $targetid?>" method="post" onsubmit="return false;">
+                    <div class="msg-textbox" id="chat-sendmsg-box">
+                        <textarea class="textarea txt"></textarea>
+                    </div>
+                    <div class="form-btn btn-line">
+                        <a id="form-send-btn" href="javascript:;" class="btn btn-primary">发送</a>
+                    </div>
+                </form>
+                
+            </div>
+
+            <ul id="talk-msg-list" class="talk-msg checkbox-list" data-url="ajax/msglist.php?uid=<?php echo $targetid?>">
+                <?php foreach ($msg_arr as $msg) { ?>
+                <li class="talk-msg-item clear">
+                    <fieldset class="date-talk">
+                        <legend class="time-title"><?php echo $msg['dateline']?></legend>
+                    </fieldset>
+                    <section class="<?php if ($msg['issend']){echo 'me-talk';} else {echo 'guest-talk';} ?> clear">
+                        <a class="avatar-talk user-avator" href="#" title="">
+                            <img class="avator-round" src="<?php echo $project.$msg['avator']?>">
+                        </a>
+                        <div class="content-talk">
+                            <div class="msg-arrow">
+                              <em class="line-c">◆</em><span class="bg-c">◆</span>
                             </div>
-                        </section>
-                    </li>
-                    <?php } ?>
-                </ul>
+                            <div class="msg-dialog-box">
+                                <input type="checkbox" name="deletepm_delid[]" class="checkbox hide" value="<?php echo $msg['pmid'] ?>">
+                                <p class="msg-dialog-text"><?php echo $msg['content']?></p>
+                            </div>
+                        </div>
+                    </section>
+                </li>
+                <?php } ?>
+            </ul>
         </div>
 
         <aside class="side">
             <div class="appl">
                 <ul>
-                    <li class="fixed current"><em class="notice-pm"></em><a href="#">纸条列表</a></li>
+                    <li class=""><a href="index.php"><em class="notice-pm"></em>纸条列表</a></li>
+                    <li class="current"><a href="#" title="<?php echo $tuser['username']?>"><?php echo $tuser['username']?></a></li>
                 </ul>
             </div>
         </aside>

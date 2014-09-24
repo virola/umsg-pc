@@ -128,8 +128,19 @@ body {
   padding: 0;
   color: #333;
 }
-img {
+img,
+fieldset {
   border: none;
+}
+fieldset {
+  display: block;
+  padding: 0 0 0 20px;
+  border-style: solid;
+  border-width: 1px 0 0 0;
+}
+fieldset legend {
+  padding: 0 5px;
+  font-weight: bold;
 }
 textarea {
   resize: none;
@@ -253,6 +264,10 @@ b {
 }
 .box-callout-info {
   border-left-color: #5bc0de;
+}
+.block-ico {
+  color: #ea1429;
+  margin-right: 5px;
 }
 .qcode .img {
   display: block;
@@ -404,16 +419,17 @@ b {
   word-wrap: normal;
   text-overflow: ellipsis;
   overflow: hidden;
-  margin: 0 10px;
   height: 40px;
   border-bottom: 1px dashed #CCC;
 }
 .appl li.current {
   margin: -1px 0 0;
-  padding: 0 10px 0 9px;
   border-bottom: 1px solid #dfdfdf;
   border-top: 1px solid #dfdfdf;
   background: #fafafa;
+}
+.appl li.current a:hover {
+  background-color: #fafafa;
 }
 .appl li .notice-pm {
   margin-top: 11px;
@@ -424,10 +440,19 @@ b {
   line-height: 40px;
   color: #333;
   font-size: 16px;
+  text-align: right;
+  padding: 0 20px;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .appl li a:hover {
   color: #00a0b0;
   text-decoration: none;
+  background-color: #efefef;
 }
 .msg-list .msg-list-item {
   cursor: pointer;
@@ -496,21 +521,6 @@ b {
   width: 20px;
   height: 20px;
 }
-.msg-list .user-avator {
-  width: 60px;
-}
-.msg-list .user-avator img {
-  display: block;
-  width: 50px;
-  height: 50px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  padding: 2px;
-  background: #FFF;
-  border: 1px solid;
-  border-color: #F2F2F2 #EEE #EEE #F2F2F2;
-}
 .msg-list .user-info {
   width: 700px;
 }
@@ -524,6 +534,21 @@ b {
   text-overflow: ellipsis;
   overflow: hidden;
   margin-right: 2em;
+}
+.user-avator {
+  width: 60px;
+}
+.user-avator img {
+  display: block;
+  width: 50px;
+  height: 50px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  padding: 2px;
+  background: #FFF;
+  border: 1px solid;
+  border-color: #F2F2F2 #EEE #EEE #F2F2F2;
 }
 .layer-menu-list {
   background: #fff;
@@ -692,4 +717,150 @@ b {
   _font-family: 'SimSun';
   background-color: #E5F1F5;
   border-radius: 2px;
+}
+.chat-ct .title {
+  border-bottom: 2px solid #00a0b0;
+  height: 24px;
+  line-height: 28px;
+  padding: 0 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #423009;
+}
+.chat-ct .title strong {
+  margin: 0 5px;
+  font-weight: bold;
+}
+.msg-form {
+  margin: 20px 10px 0;
+}
+.msg-form .msg-form-text {
+  margin: 10px 0 5px;
+}
+.msg-form .msg-textbox {
+  background: #FFFFFF;
+  border: solid 1px #ccc;
+  box-shadow: 1px 1px 1px 0px #ddd inset;
+  border-radius: 2px;
+  padding: 5px 5px 5px 7px;
+  zoom: 1;
+}
+.msg-form .msg-textbox-focus {
+  border-color: #00a0b0;
+}
+.msg-form .msg-textbox .textarea {
+  overflow: hidden;
+  height: 30px;
+  font-size: 13px;
+  font-family: Tahoma, '宋体';
+  word-wrap: break-word;
+  line-height: 18px;
+  width: 100%;
+  outline: none;
+  border: 0;
+}
+.msg-form .form-btn {
+  margin-top: 10px;
+}
+.talk-msg {
+  margin: 20px 10px 50px;
+}
+.talk-msg-item {
+  margin-bottom: 35px;
+  line-height: 24px;
+}
+.date-talk {
+  margin: 5px 65px;
+  _margin-bottom: 0;
+  text-align: center;
+  padding: 0 0 0 148px;
+  _padding-bottom: 25px;
+  border-color: #e6e6e6;
+}
+.date-talk .time-title {
+  width: 120px;
+  text-align: center;
+  font-weight: 400;
+  color: #aeaeae;
+}
+.content-talk {
+  border: 1px solid #e0dbd1;
+  border-radius: 5px;
+  position: relative;
+  zoom: 1;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+}
+.content-talk .msg-dialog-box {
+  width: 585px;
+  padding: 15px 20px 10px;
+}
+.content-talk .msg-dialog-box .checkbox {
+  float: left;
+  margin-top: 6px;
+  margin-right: 15px;
+}
+.content-talk .msg-dialog-text {
+  margin-bottom: 5px;
+  word-break: break-all;
+  white-space: normal;
+  word-wrap: break-word;
+}
+.msg-arrow {
+  position: absolute;
+  top: 15px;
+  width: 10px;
+  overflow: hidden;
+}
+.msg-arrow * {
+  font-family: "SimSun";
+  overflow: hidden;
+  font-size: 20px;
+  line-height: 1.231;
+  display: block;
+  height: 20px;
+}
+.guest-talk .avatar-talk {
+  float: right;
+}
+.guest-talk .content-talk {
+  float: right;
+  margin-right: 15px;
+  border-color: #e0dbd1;
+  background-color: #f2f2f2;
+}
+.guest-talk .msg-arrow {
+  right: -10px;
+}
+.guest-talk .msg-arrow * {
+  margin-left: -10px;
+}
+.guest-talk .msg-arrow span {
+  margin: -20px 0 0 -11px;
+}
+.guest-talk .line-c {
+  color: #e0dbd1;
+}
+.guest-talk .bg-c {
+  color: #f2f2f2;
+}
+.me-talk .avatar-talk {
+  float: left;
+}
+.me-talk .content-talk {
+  float: left;
+  margin-left: 15px;
+  background-color: #ffffff;
+  border-color: #e6e6e6;
+}
+.me-talk .msg-arrow {
+  left: -10px;
+}
+.me-talk .msg-arrow span {
+  margin: -20px 0 0 1px;
+}
+.me-talk .line-c {
+  color: #e6e6e6;
+}
+.me-talk .bg-c {
+  color: #ffffff;
 }

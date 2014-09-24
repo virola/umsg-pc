@@ -54,16 +54,18 @@
         word-wrap: normal;
         text-overflow: ellipsis;
         overflow: hidden;
-        margin: 0 10px;
         height: @side-li-height;
         border-bottom: 1px dashed #CCC;
 
         &.current {
             margin: -1px 0 0;
-            padding: 0 10px 0 9px;
             border-bottom: 1px solid #dfdfdf;
             border-top: 1px solid #dfdfdf;
             background: #fafafa;
+
+            a:hover {
+                background-color: #fafafa;
+            }
         }
 
         .notice-pm {
@@ -76,10 +78,16 @@
             line-height: @side-li-height;
             color: #333;
             font-size: 16px;
+            text-align: right;
+            padding: 0 20px;
+            word-break: break-all;
+            word-wrap: break-word;
+            .ellipsis();
 
             &:hover {
                 color: @link-hover-color;
                 text-decoration: none;
+                background-color: #efefef;
             }
         }
     }
@@ -165,19 +173,6 @@
         height: 20px;
     }
 
-    .user-avator {
-        width: 60px;
-
-        img {
-            display: block;
-            .size(50px);
-            .border-radius(2px);
-            padding: 2px;
-            background: #FFF;
-            border: 1px solid;
-            border-color: #F2F2F2 #EEE #EEE #F2F2F2;
-        }
-    }
     .user-info {
         width: 780px - 80px;
 
@@ -193,7 +188,20 @@
             margin-right: 2em;
         }
     }
+}
 
+.user-avator {
+    width: 60px;
+
+    img {
+        display: block;
+        .size(50px);
+        .border-radius(2px);
+        padding: 2px;
+        background: #FFF;
+        border: 1px solid;
+        border-color: #F2F2F2 #EEE #EEE #F2F2F2;
+    }
 }
 
 .layer-menu-list {

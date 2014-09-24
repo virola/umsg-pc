@@ -57,7 +57,7 @@ $(function () {
     var baseOperation = $('.operation');
     var delOperation = $('.operation-del');
 
-    var allCheckbox = $('.msg-list input:checkbox');
+    var allCheckbox = $('.checkbox-list input:checkbox');
     var checkAllLabel = $('.main .delete-all');
     var checkAllBox = checkAllLabel.children('input:checkbox');
 
@@ -95,4 +95,38 @@ $(function () {
             });
         }
     });
+
+    
+    /**
+     * message list 页面逻辑处理
+     */
+    var replyForm = $('#chat-sendmsg-form');
+    var replyText = $('#chat-sendmsg-box').find('.txt');
+    var replyTextWrap = replyText.parent();
+
+    $('#form-send-btn').on('click', function () {
+        var url = replyForm.attr('action');
+        var content = $.trim(replyText.val());
+
+        if (!content) {
+            return false;
+        }
+
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: {
+                content: content
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data && data.status === 0) {
+                    window.location.reload();
+                }
+            }
+        });
+
+        return false;
+    });
+
 });
