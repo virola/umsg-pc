@@ -1,39 +1,7 @@
-
-
-function showPopup(id, options) {
-    var target = $('#popup-' + id);
-    target.show();
-    
-    options = $.extend({}, options);
-
-    // target.dialog(options);
-    // target.dialog('open');
-
-    var top = ($(window).height() - target.outerHeight()) / 2;
-    var left = ($(window).width() - target.outerWidth()) / 2;
-    target.css({
-        left: left + 'px',
-        top: top + 'px'
-    });
-
-    if (options.modal) {
-        var mask = $('<div/>').addClass('mask').css({
-            width: $(window).width() + 'px',
-            height:  Math.max($(window).height(), $(document.body).outerHeight()) + 'px'
-        });
-
-        $(document.body).append(mask);
-        mask.show();
-
-        mask.on('click', function () {
-            var me = $(this);
-            me.hide();
-            target.hide();
-            me.remove();
-        });
-    }
-}
-
+/**
+ * @file 页面交互逻辑处理
+ * @author virola
+ */
 
 $(function () {
 
@@ -45,7 +13,9 @@ $(function () {
         var item = $(this);
         var target = $(ev.target);
         
-        if (target.hasClass('.checkbox')) {
+        var url = item.attr('data-url');
+        if (url) {
+            window.location.href = url;
         }
     });
 
@@ -64,7 +34,7 @@ $(function () {
 
 
     $('.popup-trigger').on('click', function () {
-        showPopup($(this).attr('data-id'), {
+        util.showPopup($(this).attr('data-id'), {
             title: '写纸条',
             width: 440,
             modal: true,
@@ -80,5 +50,49 @@ $(function () {
     }).on('click', function () {
         $(this).closest('.popup').hide();
         $('.mask').remove();
+    });
+
+
+    // 操作栏按钮
+    var baseOperation = $('.operation');
+    var delOperation = $('.operation-del');
+
+    var allCheckbox = $('.msg-list input:checkbox');
+    var checkAllLabel = $('.main .delete-all');
+    var checkAllBox = checkAllLabel.children('input:checkbox');
+
+    $('#btn-batch-del').on('click', function () {
+        baseOperation.hide();
+        delOperation.show();
+        allCheckbox.show();
+    });
+
+    $('#btn-del-cancel').on('click', function () {
+        baseOperation.show();
+        delOperation.hide();
+        allCheckbox.hide();
+    });
+
+    checkAllBox.on('click', function () {
+        var checked = $(this).prop('checked');
+        allCheckbox.prop('checked', checked);
+    });
+
+    var confirmDialog;
+    $('#btn-del-confirm').on('click', function () {
+        // to delete
+        if (confirmDialog) {
+            confirmDialog.show();
+        }
+        else {
+            confirmDialog = util.confirm({
+                content: '确认要删除这些对话记录吗？',
+                modal: 1,
+                okHandler: function () {
+                    var dialog = this;
+                    console.log(dialog);
+                }
+            });
+        }
     });
 });

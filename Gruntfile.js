@@ -74,6 +74,8 @@ module.exports = function (grunt) {
             'page': {
                 files: {
                     'asset/js/main.js': [
+                        'src/js/common/Dialog.js',
+                        'src/js/common/util.js',
                         'src/js/common.js'
                     ]
                 }

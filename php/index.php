@@ -41,16 +41,20 @@ $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/
     <div class="main clear">
         <article class="ct">
             <div class="operation clear">
-                <label for="delete-all" class="delete-all hide"><input type="checkbox" name="chkall" id="delete-all" class="pc">全选</label> &nbsp; 
-                <a class="btn" href="#">批量删除</a>
-                <a class="btn" href="#">全部标记已读</a>
+                <a class="btn btn-default" href="javascript:;" id="btn-batch-del">批量删除</a>
+                <a class="btn btn-default" href="javascript:;" id="btn-mark-read">全部标记已读</a>
                 <a class="btn btn-primary fr popup-trigger" href="#" data-id="new-msg">写纸条</a>
+            </div>
+            <div class="operation-del hide clear">
+                <label for="delete-all" class="delete-all"><input type="checkbox" name="chkall" id="delete-all" class="checkbox">全选</label>
+                <a class="btn btn-primary" href="javascript:;" id="btn-del-confirm">确定</a>
+                <a class="btn btn-primary" href="javascript:;" id="btn-del-cancel">取消</a>
             </div>
             <div class="msg-list">
                 <?php foreach ($msg_arr as $msg) { ?>
                 <dl data-url="show.php?uid=<?php echo $msg['userid'] ?>" class="msg-list-item clear">
                     <dd class="list-check fl">
-                        <input type="checkbox" name="deletepm_deluid[]" class="pm-c hide" value="<?php echo $msg['userid'] ?>">
+                        <input type="checkbox" name="deletepm_deluid[]" class="checkbox hide" value="<?php echo $msg['userid'] ?>">
                     </dd>
                     <dd class="user-avator fl">
                         <img class="avator-round" src="<?php echo $project.$msg['avator']?>">
@@ -94,15 +98,16 @@ $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/
                 <h3 class="fl form-label">发&nbsp;&nbsp;给：</h3>
                 <div class="fl form-item">
                     <div class="inputbox">
-                        <input type="text" placeholder="请输入对方昵称" class="text input" id="add-input">
+                        <input type="text" placeholder="请输入对方用户名" class="text input" id="add-input">
                     </div>
+                    <p class="tip-text">多个用户使用逗号、分号或回车提示系统分开</p>
                 </div>
         </div>
         <div class="form-line clear">
             <h3 class="fl form-label">内&nbsp;&nbsp;容：</h3>
             <div class="fl form-item">
                 <textarea class="textbox"></textarea>
-                <p class="num">还可以输入<span>300</span>字</p>
+                <p class="num hide">还可以输入<span>300</span>字</p>
             </div>
         </div>
         <div class="btn-line clear">
