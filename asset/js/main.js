@@ -195,6 +195,9 @@ var util = (function () {
 
     return exports;
 })();
+var util = window.util || {};
+var pageParams = window.pageParams || {};
+
 $(function () {
 
     // scroll top

@@ -390,7 +390,7 @@ b {
   background-color: #fafafa;
 }
 .main .ct {
-  margin-right: 20px;
+  margin-right: 15px;
   padding-top: 10px;
   width: 800px;
   float: right;
@@ -425,8 +425,9 @@ b {
   padding-bottom: 10px;
   border-bottom: 1px solid #00a0b0;
 }
-.operation-del label {
-  margin: 0 10px;
+.operation-del {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #00a0b0;
 }
 .operation-search label {
   margin: 0 10px;
@@ -510,7 +511,7 @@ b {
 }
 .msg-list .plus .bubble {
   position: absolute;
-  top: 26px;
+  top: 30px;
   right: 0;
   padding: 0 2px;
   font-family: arial;
@@ -788,7 +789,8 @@ b {
 .chat-ct .main-foot {
   margin-bottom: 50px;
 }
-.chat-ct .operation {
+.chat-ct .operation,
+.chat-ct .operation-del {
   border: 0;
 }
 .msg-form {
