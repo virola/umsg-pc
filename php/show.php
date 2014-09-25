@@ -37,13 +37,12 @@ if ($result) {
     while($row = mysql_fetch_array($result)) {
         $issend = ($row['authorid'] == $targetid ? false : true);
         $min = (int)date('i', $row['dateline']);
-        
         $msg_arr[] = array(
             'pmid' => $row['pmid'],
             'userid' => $row['authorid'],
             'username' => $row['username'],
             'content' => $row['content'],
-            'dateline' => date('Y年n月d日 G:', $row['dateline']).$min,
+            'dateline' => date('Y年n月d日 H:i', $row['dateline']),
             'issend' => $issend,
             'avator' => ($issend ? $user['avator'] : $tuser['avator']),
         );
