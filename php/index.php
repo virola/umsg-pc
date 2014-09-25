@@ -22,6 +22,28 @@ if ($result) {
 }
 
 $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/';
+
+$action = $_GET['action'];
+if ($action == 'new') {
+    $showPopup = true;
+
+    $targetid = $_GET['uid'];
+
+    $sqltuser = 'select * from user where userid='.$targetid.';';
+    $result = mysql_query($sqltuser, $con);
+    if ($result) {
+        while($row = mysql_fetch_array($result)) {
+            $tuser = array(
+                'userid' => $row['userid'],
+                'username' => $row['username'],
+                'avator' => getAvator(),
+            );
+        }
+    }
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -47,8 +69,8 @@ $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/
             </div>
             <div class="operation-del hide clear">
                 <label for="delete-all" class="delete-all"><input type="checkbox" name="chkall" id="delete-all" class="checkbox">全选</label>
-                <a class="btn btn-primary" href="javascript:;" id="btn-del-confirm">确定</a>
-                <a class="btn btn-primary" href="javascript:;" id="btn-del-cancel">取消</a>
+                <a class="btn btn-primary" href="javascript:;" id="btn-del-confirm">确定删除</a>
+                <a class="btn btn-primary btn-del-cancel" href="javascript:;">取消</a>
             </div>
             <div class="msg-list checkbox-list">
                 <?php foreach ($msg_arr as $msg) { ?>
@@ -92,12 +114,12 @@ $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/
 
 <div class="popup" id="popup-new-msg">
     <h2 class="popup-title">写纸条</h2>
-    <div class="popup-content msg-form">
+    <div class="popup-content msg-form" id="new-msg-form">
 
         <div class="form-line clear">
                 <h3 class="fl form-label">发&nbsp;&nbsp;给：</h3>
                 <div class="fl form-item">
-                    <div class="inputbox">
+                    <div class="inputbox inputbox-username">
                         <input type="text" placeholder="请输入对方用户名" class="text input" id="add-input">
                     </div>
                     <p class="tip-text">多个用户使用逗号、分号或回车提示系统分开</p>
@@ -106,16 +128,16 @@ $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/
         <div class="form-line clear">
             <h3 class="fl form-label">内&nbsp;&nbsp;容：</h3>
             <div class="fl form-item">
-                <textarea class="textbox"></textarea>
+                <textarea class="textbox" name="content"></textarea>
                 <p class="num hide">还可以输入<span>300</span>字</p>
             </div>
         </div>
         <div class="btn-line clear">
-            <a class="btn btn-primary btn-send btn-noloading" href="#"><b class="loading"></b>发送</a>
+            <a id="btn-send" class="btn btn-primary btn-noloading" href="javascript:;"><b class="loading"></b>发送</a>
         </div>            
     </div>
 
-    <span class="close"><i class="fa fa-times"></i></span>
+    <a class="close" href="javascript:;"><i class="fa fa-times"></i></a>
 </div>
 
 <?php include('./common/footer.php') ?>

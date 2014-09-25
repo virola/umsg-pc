@@ -15,6 +15,9 @@ body {
 img, fieldset {
     border: none;
 }
+img:hover {
+    .opacity(90);
+}
 fieldset {
     display: block;
     padding: 0 0 0 20px;
@@ -72,6 +75,10 @@ em, i, strong, b {
     &:hover {
         text-decoration: none;
     }
+
+    i {
+        margin-right: 5px;
+    }
 }
 
 .btn-default {
@@ -97,6 +104,9 @@ em, i, strong, b {
 .hide {
     display: none;
 }
+.hide-forever {
+    display: none!important;
+}
 .fl {
     float: left;
 }
@@ -111,7 +121,7 @@ em, i, strong, b {
 .w980 {
     margin: 0 auto;
     clear: both;
-    width: 990px;
+    width: 980px;
 }
 .mt20 {
     margin-top: 20px;
@@ -151,5 +161,4 @@ em, i, strong, b {
 
 .block-ico {
     color: #ea1429;
-    margin-right: 5px;
 }

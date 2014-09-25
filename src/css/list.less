@@ -15,7 +15,13 @@
         }
     }
 
+    .main-foot {
+        margin-bottom: 50px;
+    }
 
+    .operation {
+        border: 0;
+    }
 }
 
 .msg-form {
@@ -39,7 +45,7 @@
 
         .textarea {
             overflow: hidden;
-            height: 30px;
+            height: 18px;
             font-size: 13px;
             font-family: Tahoma, '宋体';
             word-wrap: break-word;
@@ -47,6 +53,10 @@
             width: 100%;
             outline: none;
             border: 0;
+
+            &-expanded {
+                height: 50px;
+            }
         }
         
     }
@@ -57,11 +67,15 @@
 }
 
 .talk-msg {
-    margin: 20px 10px 50px;
+    margin: 20px 10px;
 
     &-item {
         margin-bottom: 35px;
         line-height: 24px;
+
+        &:last {
+            margin-bottom: 0;
+        }
     }
 
 }
@@ -75,10 +89,11 @@
     border-color: #e6e6e6;
 
     .time-title {
-        width: 120px;
+        width: 160px;
         text-align: center;
         font-weight: 400;
         color: #aeaeae;
+        font-size: 12px;
     }
 }
 
@@ -125,6 +140,11 @@
     }
 }
 
+@guest-color: #e6e6e6;
+@guest-bg-color: #ffffff;
+@me-color: #e0dbd1;
+@me-bg-color: #f2f2f2;
+
 .guest-talk {
     .avatar-talk {
         float: right;
@@ -132,8 +152,8 @@
     .content-talk {
         float: right;
         margin-right: 15px;
-        border-color: #e0dbd1;
-        background-color: #f2f2f2;
+        border-color: @guest-color;
+        background-color: @guest-bg-color;
     }
     .msg-arrow {
         right: -10px;
@@ -146,11 +166,11 @@
         }
     }
     .line-c {
-        color: #e0dbd1;
+        color: @guest-color;
     }
 
     .bg-c {
-        color: #f2f2f2;
+        color: @guest-bg-color;
     }
 }
 
@@ -162,8 +182,8 @@
     .content-talk {
         float: left;
         margin-left: 15px;
-        background-color: #ffffff;
-        border-color: #e6e6e6;
+        background-color: @me-bg-color;
+        border-color: @me-color;
     }
 
     .msg-arrow {
@@ -175,9 +195,25 @@
     }
 
     .line-c {
-        color: #e6e6e6;
+        color: @me-color;
     }
     .bg-c {
-        color: #ffffff;
+        color: @me-bg-color;
+    }
+}
+
+
+.load-more {
+    background-color: #f0f0f0;
+    color: #888;
+    text-align: center;
+    font-size: 12px;
+    padding: 15px;
+    margin: 15px;
+    cursor: pointer;
+
+    &-end {
+        cursor: default;
+        background: none;
     }
 }

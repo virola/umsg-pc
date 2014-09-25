@@ -16,7 +16,7 @@ function Dialog(params) {
 
     // 标题区域
     var titleDom = $('<div/>').addClass('popup-title').text(options.title).appendTo(main);
-    var closeDom = $('<span><i class="fa fa-times"></i></span>').addClass('close').appendTo(main);
+    var closeDom = $('<a href="javascript:;"><i class="fa fa-times"></i></a>').addClass('close').appendTo(main);
 
     // 内容区域
     var body = $('<div/>').addClass('popup-content').appendTo(main);
@@ -66,9 +66,10 @@ Dialog.prototype = {
 
         var top = ($(window).height() - main.outerHeight()) / 2;
         var left = ($(window).width() - main.outerWidth()) / 2;
+        var scrollTop = $(window).scrollTop();
         main.css({
             left: left + 'px',
-            top: top + 'px'
+            top: (top + scrollTop) + 'px'
         });
     },
 

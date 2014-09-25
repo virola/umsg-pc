@@ -43,6 +43,9 @@ var util = (function () {
 
     function showPopup(id, options) {
         var target = $('#popup-' + id);
+        if (!target.size()) {
+            return false;
+        }
         target.show();
         
         options = $.extend({}, options);
@@ -65,17 +68,34 @@ var util = (function () {
 
             mask.on('click', function () {
                 var me = $(this);
-                me.hide();
                 target.hide();
-                me.remove();
+                me.hide().remove();
             });
         }
     }
 
     exports.showPopup = showPopup;
 
-    function ModalBox(params) {
+    exports.format = function (source, opts) {
+        source = String(source);
+        var data = Array.prototype.slice.call(arguments,1);
+        var toString = Object.prototype.toString;
 
+        if(data.length){
+            data = data.length == 1 ? 
+                /* ie 下 Object.prototype.toString.call(null) == '[object Object]' */
+                (opts !== null && (/\[object Array\]|\[object Object\]/.test(toString.call(opts))) ? opts : data) 
+                : data;
+            return source.replace(/#\{(.+?)\}/g, function (match, key){
+                var replacer = data[key];
+                // chrome 下 typeof /a/ == 'function'
+                if('[object Function]' == toString.call(replacer)){
+                    replacer = replacer(key);
+                }
+                return ('undefined' == typeof replacer ? '' : replacer);
+            });
+        }
+        return source;
     };
 
     return exports;

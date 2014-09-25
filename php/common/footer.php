@@ -37,7 +37,13 @@
         </div>
     </div>
 </div>
-
+<a id="scrolltop" title="返回顶部" class="scrolltop"><b>返回顶部</b></a>
+<script>
+var pageParams = {
+    isNew: '<?php echo $showPopup?>',
+    tousername: '<?php echo $tuser['username']?>'
+};
+</script>
 <script src="../dep/jquery/dist/jquery.min.js"></script>
 <script src="../dep/jquery-ui/jquery-ui.min.js"></script>
 <script src="../asset/js/main.js"></script>

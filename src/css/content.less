@@ -25,17 +25,42 @@
         margin: 10px 5px 0 0;
     }
 }
-.operation, .operation-del {
+.operation, .operation-del, .operation-search {
     margin: 10px;
     line-height: 30px;
     margin-left: 0;
 
     a {
-        line-height: 24px;
+        line-height: 25px;
     }
 
     .btn {
         margin-left: 10px;
+    }
+}
+.operation {
+    padding-bottom: 10px;
+    border-bottom: 1px solid @link-hover-color;
+}
+.operation-del {
+    label {
+        margin: 0 10px;
+    }
+}
+.operation-search {
+    label {
+        margin: 0 10px;
+    }
+
+    input {
+        width: 300px;
+        border: 1px solid #ddd;
+        .border-radius(2px);
+        margin: 0;
+        padding: 0 5px;
+        line-height: 28px;
+        font-size: 14px;
+        background-color: #fff;
     }
 }
 
@@ -68,10 +93,6 @@
             }
         }
 
-        .notice-pm {
-            margin-top: 11px;
-        }
-
         a {
             display: block;
             height: @side-li-height;
@@ -79,7 +100,7 @@
             color: #333;
             font-size: 16px;
             text-align: right;
-            padding: 0 20px;
+            padding: 0 20px 0 0;
             word-break: break-all;
             word-wrap: break-word;
             .ellipsis();
@@ -228,3 +249,24 @@
 }
 
 
+.scrolltop {
+    position: fixed;
+    bottom: 20%;
+    right: 10px;
+    display: none;
+    margin: -30px 0 0 2px;
+    .size(50px);
+    padding: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+    background: url(http://xiaozu.94uv.com/static/image/common/scrolltop.png) no-repeat 0 0;
+    background-position: -25px -30px;
+
+    &:hover {
+        background-position: -109px -30px;
+    }
+
+    b {
+        visibility: hidden;
+    }
+}

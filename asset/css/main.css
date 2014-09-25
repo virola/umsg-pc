@@ -132,6 +132,10 @@ img,
 fieldset {
   border: none;
 }
+img:hover {
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
 fieldset {
   display: block;
   padding: 0 0 0 20px;
@@ -195,6 +199,9 @@ b {
 .btn:hover {
   text-decoration: none;
 }
+.btn i {
+  margin-right: 5px;
+}
 .btn-default {
   color: #333;
   background-color: #fff;
@@ -212,6 +219,9 @@ b {
 }
 .hide {
   display: none;
+}
+.hide-forever {
+  display: none!important;
 }
 .fl {
   float: left;
@@ -233,7 +243,7 @@ b {
 .w980 {
   margin: 0 auto;
   clear: both;
-  width: 990px;
+  width: 980px;
 }
 .mt20 {
   margin-top: 20px;
@@ -267,7 +277,6 @@ b {
 }
 .block-ico {
   color: #ea1429;
-  margin-right: 5px;
 }
 .qcode .img {
   display: block;
@@ -348,11 +357,13 @@ b {
 .notice-system,
 .notice-manage,
 .notice-app {
-  float: left;
+  display: inline-block;
+  *display: inline;
   width: 18px;
   height: 14px;
   background-image: url(../img/ico_notice.png);
-  margin: 8px 5px 5px 0;
+  margin: 3px 5px 5px 0;
+  vertical-align: middle;
 }
 .notice-pm {
   background-position: 0 0;
@@ -360,7 +371,7 @@ b {
 .page {
   margin: 15px auto 0;
   background: #fff;
-  width: 990px;
+  width: 980px;
   margin: 0 auto;
 }
 .logo {
@@ -394,18 +405,43 @@ b {
   margin: 10px 5px 0 0;
 }
 .operation,
-.operation-del {
+.operation-del,
+.operation-search {
   margin: 10px;
   line-height: 30px;
   margin-left: 0;
 }
 .operation a,
-.operation-del a {
-  line-height: 24px;
+.operation-del a,
+.operation-search a {
+  line-height: 25px;
 }
 .operation .btn,
-.operation-del .btn {
+.operation-del .btn,
+.operation-search .btn {
   margin-left: 10px;
+}
+.operation {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #00a0b0;
+}
+.operation-del label {
+  margin: 0 10px;
+}
+.operation-search label {
+  margin: 0 10px;
+}
+.operation-search input {
+  width: 300px;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  margin: 0;
+  padding: 0 5px;
+  line-height: 28px;
+  font-size: 14px;
+  background-color: #fff;
 }
 #btn-del-confirm {
   margin-left: 20px;
@@ -431,9 +467,6 @@ b {
 .appl li.current a:hover {
   background-color: #fafafa;
 }
-.appl li .notice-pm {
-  margin-top: 11px;
-}
 .appl li a {
   display: block;
   height: 40px;
@@ -441,7 +474,7 @@ b {
   color: #333;
   font-size: 16px;
   text-align: right;
-  padding: 0 20px;
+  padding: 0 20px 0 0;
   word-break: break-all;
   word-wrap: break-word;
   overflow: hidden;
@@ -570,6 +603,26 @@ b {
   background-color: #e6e6e6;
   text-decoration: none;
 }
+.scrolltop {
+  position: fixed;
+  bottom: 20%;
+  right: 10px;
+  display: none;
+  margin: -30px 0 0 2px;
+  width: 50px;
+  height: 50px;
+  padding: 3px;
+  border-radius: 3px;
+  cursor: pointer;
+  background: url(http://xiaozu.94uv.com/static/image/common/scrolltop.png) no-repeat 0 0;
+  background-position: -25px -30px;
+}
+.scrolltop:hover {
+  background-position: -109px -30px;
+}
+.scrolltop b {
+  visibility: hidden;
+}
 .mask {
   position: fixed;
   top: 0;
@@ -595,6 +648,7 @@ b {
   color: #999;
   cursor: pointer;
 }
+.popup .close:hover,
 .popup .close-hover {
   color: #00a0b0;
 }
@@ -731,6 +785,12 @@ b {
   margin: 0 5px;
   font-weight: bold;
 }
+.chat-ct .main-foot {
+  margin-bottom: 50px;
+}
+.chat-ct .operation {
+  border: 0;
+}
 .msg-form {
   margin: 20px 10px 0;
 }
@@ -750,7 +810,7 @@ b {
 }
 .msg-form .msg-textbox .textarea {
   overflow: hidden;
-  height: 30px;
+  height: 18px;
   font-size: 13px;
   font-family: Tahoma, '宋体';
   word-wrap: break-word;
@@ -759,15 +819,21 @@ b {
   outline: none;
   border: 0;
 }
+.msg-form .msg-textbox .textarea-expanded {
+  height: 50px;
+}
 .msg-form .form-btn {
   margin-top: 10px;
 }
 .talk-msg {
-  margin: 20px 10px 50px;
+  margin: 20px 10px;
 }
 .talk-msg-item {
   margin-bottom: 35px;
   line-height: 24px;
+}
+.talk-msg-item:last {
+  margin-bottom: 0;
 }
 .date-talk {
   margin: 5px 65px;
@@ -778,10 +844,11 @@ b {
   border-color: #e6e6e6;
 }
 .date-talk .time-title {
-  width: 120px;
+  width: 160px;
   text-align: center;
   font-weight: 400;
   color: #aeaeae;
+  font-size: 12px;
 }
 .content-talk {
   border: 1px solid #e0dbd1;
@@ -825,8 +892,8 @@ b {
 .guest-talk .content-talk {
   float: right;
   margin-right: 15px;
-  border-color: #e0dbd1;
-  background-color: #f2f2f2;
+  border-color: #e6e6e6;
+  background-color: #ffffff;
 }
 .guest-talk .msg-arrow {
   right: -10px;
@@ -838,10 +905,10 @@ b {
   margin: -20px 0 0 -11px;
 }
 .guest-talk .line-c {
-  color: #e0dbd1;
+  color: #e6e6e6;
 }
 .guest-talk .bg-c {
-  color: #f2f2f2;
+  color: #ffffff;
 }
 .me-talk .avatar-talk {
   float: left;
@@ -849,8 +916,8 @@ b {
 .me-talk .content-talk {
   float: left;
   margin-left: 15px;
-  background-color: #ffffff;
-  border-color: #e6e6e6;
+  background-color: #f2f2f2;
+  border-color: #e0dbd1;
 }
 .me-talk .msg-arrow {
   left: -10px;
@@ -859,8 +926,21 @@ b {
   margin: -20px 0 0 1px;
 }
 .me-talk .line-c {
-  color: #e6e6e6;
+  color: #e0dbd1;
 }
 .me-talk .bg-c {
-  color: #ffffff;
+  color: #f2f2f2;
+}
+.load-more {
+  background-color: #f0f0f0;
+  color: #888;
+  text-align: center;
+  font-size: 12px;
+  padding: 15px;
+  margin: 15px;
+  cursor: pointer;
+}
+.load-more-end {
+  cursor: default;
+  background: none;
 }
