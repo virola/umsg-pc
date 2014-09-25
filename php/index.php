@@ -70,7 +70,7 @@ if ($action == 'new') {
             <div class="operation-del hide clear">
                 <label for="delete-all" class="delete-all"><input type="checkbox" name="chkall" id="delete-all" class="checkbox">全选</label>
                 <a class="btn btn-primary" href="javascript:;" id="btn-del-confirm">确定删除</a>
-                <a class="btn btn-primary btn-del-cancel" href="javascript:;">取消</a>
+                <a class="btn btn-default btn-del-cancel" href="javascript:;">取消</a>
             </div>
             <div class="msg-list checkbox-list">
                 <?php foreach ($msg_arr as $msg) { ?>

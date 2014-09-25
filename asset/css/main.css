@@ -488,6 +488,9 @@ b {
   text-decoration: none;
   background-color: #efefef;
 }
+.msg-list {
+  margin: 0 0 30px;
+}
 .msg-list .msg-list-item {
   cursor: pointer;
 }

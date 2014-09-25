@@ -82,7 +82,7 @@ $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/
             <div class="operation-del hide clear">
                 <label for="delete-all" class="delete-all"><input type="checkbox" name="chkall" id="delete-all" class="checkbox">全选</label>
                 <a class="btn btn-primary btn-delpm-confirm" href="javascript:;">确定删除</a>
-                <a class="btn btn-primary btn-del-cancel" href="javascript:;">取消</a>
+                <a class="btn btn-default btn-del-cancel" href="javascript:;">取消</a>
             </div>
             <div class="operation-search hide clear">
                 <label>查找内容：</label><input type="search" name="content" id="msg-search-input">
