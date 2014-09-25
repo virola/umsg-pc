@@ -36,7 +36,7 @@ if ($targetid) {
                 'userid' => $row['authorid'],
                 'username' => $row['username'],
                 'content' => $row['content'],
-                'dateline' => date('Y-n-d G:i', $row['dateline']),
+                'dateline' => date('Y年n月d日 G:i', $row['dateline']),
                 'issend' => $issend,
                 'avator' => $project.($issend ? $user['avator'] : $tavator),
             );
