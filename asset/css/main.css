@@ -793,6 +793,9 @@ b {
 .chat-ct .operation-del {
   border: 0;
 }
+.chat-ct .operation-del label {
+  margin: 0 10px;
+}
 .msg-form {
   margin: 20px 10px 0;
 }
