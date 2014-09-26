@@ -38,6 +38,8 @@
     </div>
 </div>
 <a id="scrolltop" title="返回顶部" class="scrolltop"><b>返回顶部</b></a>
+<span class="loading"><i class="fa fa-spinner fa-spin"></i></span>
+
 <script>
 var pageParams = {
     isNew: '<?php echo $showPopup?>',

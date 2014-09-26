@@ -278,6 +278,9 @@ b {
 .block-ico {
   color: #ea1429;
 }
+.bold {
+  font-weight: 900;
+}
 .qcode .img {
   display: block;
   width: 89px;
@@ -384,22 +387,21 @@ b {
   background: url(../img/logo.png) left center no-repeat;
 }
 .main {
-  border: 1px solid #DFDFDF;
   min-height: 300px;
-  background: url(../img/repeat_bg_y_green.png) repeat-y -13px 0;
+  background: url(../img/repeat_bg_y_green.png) repeat-y 0 0;
   background-color: #fafafa;
 }
 .main .ct {
-  margin-right: 15px;
+  margin-right: 20px;
   padding-top: 10px;
-  width: 800px;
+  width: 780px;
   float: right;
 }
 .main .side {
   float: left;
   overflow: hidden;
   margin-bottom: 10px;
-  width: 137px;
+  width: 150px;
 }
 .main .checkbox {
   margin: 10px 5px 0 0;
@@ -446,47 +448,6 @@ b {
 }
 #btn-del-confirm {
   margin-left: 20px;
-}
-.appl {
-  margin-top: 20px;
-}
-.appl li {
-  display: block;
-  white-space: nowrap;
-  word-wrap: normal;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  height: 40px;
-  border-bottom: 1px dashed #CCC;
-}
-.appl li.current {
-  margin: -1px 0 0;
-  border-bottom: 1px solid #dfdfdf;
-  border-top: 1px solid #dfdfdf;
-  background: #fafafa;
-}
-.appl li.current a:hover {
-  background-color: #fafafa;
-}
-.appl li a {
-  display: block;
-  height: 40px;
-  line-height: 40px;
-  color: #333;
-  font-size: 16px;
-  text-align: right;
-  padding: 0 20px 0 0;
-  word-break: break-all;
-  word-wrap: break-word;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.appl li a:hover {
-  color: #00a0b0;
-  text-decoration: none;
-  background-color: #efefef;
 }
 .msg-list {
   margin: 0 0 30px;
@@ -559,7 +520,7 @@ b {
   height: 20px;
 }
 .msg-list .user-info {
-  width: 700px;
+  width: 680px;
 }
 .msg-list .user-info .username {
   font-weight: 700;
@@ -626,6 +587,79 @@ b {
 }
 .scrolltop b {
   visibility: hidden;
+}
+.appl {
+  margin-top: 20px;
+}
+.appl li {
+  display: block;
+  white-space: nowrap;
+  word-wrap: normal;
+  text-overflow: ellipsis;
+}
+.appl li.current a.title {
+  border-bottom: 1px solid #dfdfdf;
+  border-top: 1px solid #dfdfdf;
+  background: #fafafa;
+  color: #000;
+}
+.appl li.current i {
+  color: #008997;
+}
+.appl li.current a:hover {
+  background-color: #fafafa;
+}
+.appl li a {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  color: #333;
+  font-size: 16px;
+  padding: 0 10px 0 20px;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.appl li a i {
+  margin-right: 5px;
+  color: #666666;
+}
+.appl li a:hover {
+  text-decoration: none;
+  background-color: #a8e0e6;
+}
+.appl .list-sub {
+  margin: 1px 0;
+}
+.appl .list-sub li {
+  line-height: 30px;
+}
+.appl .list-sub li a {
+  font-size: 13px;
+  line-height: 30px;
+  height: 30px;
+  padding-left: 40px;
+}
+.appl .list-sub li a:hover {
+  background: #a8e0e6;
+}
+.appl .list-sub li a i {
+  color: #666666;
+}
+.appl .list-sub li.current {
+  background: #9ddbe2;
+}
+.appl .list-sub li.current a,
+.appl .list-sub li.current a:hover {
+  font-weight: bold;
+  color: #000;
+  background-color: #9ddbe2;
+}
+.appl .list-sub li.current i {
+  color: #008997;
 }
 .mask {
   position: fixed;

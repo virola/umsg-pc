@@ -140,12 +140,7 @@ $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/
         </div>
 
         <aside class="side">
-            <div class="appl">
-                <ul>
-                    <li class=""><a href="index.php"><em class="notice-pm"></em>纸条列表</a></li>
-                    <li class="current"><a href="#" title="<?php echo $tuser['username']?>"><?php echo $tuser['username']?></a></li>
-                </ul>
-            </div>
+            <?php include("./common/side.php") ?>
         </aside>
     
     </div>

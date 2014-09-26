@@ -103,11 +103,7 @@ if ($action == 'new') {
         </article>
 
         <aside class="side">
-            <div class="appl">
-                <ul>
-                    <li class="fixed current"><a href="index.php"><em class="notice-pm"></em>纸条列表</a></li>
-                </ul>
-            </div>
+            <?php include("./common/side.php") ?>
         </aside>
     </div>
 </div>
