@@ -1,0 +1,100 @@
+@color-default: #00a0b0;
+@hover-bg-color: darken(#c8ebef, 8%);
+@ico-def-color: #666;
+@ico-em-color: #008997;
+
+
+.appl {
+    margin-top: 20px;
+
+    @side-li-height: 40px;
+
+    li {
+        display: block;
+        white-space: nowrap;
+        word-wrap: normal;
+        text-overflow: ellipsis;
+
+        &.current {
+
+            a.title {
+                border-bottom: 1px solid #dfdfdf;
+                border-top: 1px solid #dfdfdf;
+                background: #fafafa;
+                color: #000;
+            }
+
+            i {
+                color: @ico-em-color;
+            }
+
+            a:hover {
+                background-color: #fafafa;
+            }
+        }
+
+        a {
+            display: block;
+            height: @side-li-height;
+            line-height: @side-li-height;
+            color: #333;
+            font-size: 16px;
+            padding: 0 10px 0 20px;
+            word-break: break-all;
+            word-wrap: break-word;
+            .ellipsis();
+
+            i {
+                margin-right: 5px;
+                color: @ico-def-color;
+            }
+
+            &:hover {
+                text-decoration: none;
+                background-color: @hover-bg-color;
+            }
+        }
+    }
+
+    @sub-li-height: @side-li-height - 10px;
+
+    .list-sub {
+        margin: 1px 0;
+        // background: #8eced4;
+
+        li {
+            line-height: @sub-li-height;
+
+            a {
+                font-size: 13px;
+                line-height: @sub-li-height;
+                height: @sub-li-height;
+                padding-left: 40px;
+
+                &:hover {
+                    background: @hover-bg-color;
+                }
+
+                i {
+                    color: @ico-def-color;
+                }
+            }
+
+            &.current {
+                background: darken(@hover-bg-color, 3%);
+
+                a, a:hover {
+                    font-weight: bold;
+                    color: #000;
+                    background-color: darken(@hover-bg-color, 3%);
+                }
+
+                i {
+                    color: @ico-em-color;
+                }
+            }
+        }
+
+        
+    }
+}
