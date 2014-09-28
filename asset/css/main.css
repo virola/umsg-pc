@@ -452,8 +452,30 @@ b {
 .msg-list {
   margin: 0 0 30px;
 }
-.msg-list .msg-list-item {
+.msg-list-item {
   cursor: pointer;
+}
+.msg-list-item-at .ico-wrap {
+  text-align: center;
+  vertical-align: middle;
+}
+.msg-list-item-at .ico-wrap .fa {
+  padding: 2px;
+  display: block;
+  width: 50px;
+  height: 50px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid;
+  border-color: #F2F2F2 #EEE #EEE #F2F2F2;
+  background: #5bb4da;
+  font-size: 40px;
+  line-height: 50px;
+  color: #fff;
+}
+.msg-list-item-new {
+  background-color: #f2f2f2;
 }
 .msg-list dl {
   position: relative;
@@ -468,7 +490,7 @@ b {
 }
 .msg-list .plus {
   position: absolute;
-  right: 10px;
+  right: 12px;
   top: 12px;
   font-size: 12px;
   color: #808080;
@@ -490,7 +512,7 @@ b {
   line-height: 14px;
   text-align: center;
 }
-.msg-list .plus .operate {
+.msg-list .operate {
   display: inline-block;
   width: 12px;
   height: 12px;
@@ -504,7 +526,7 @@ b {
   text-align: center;
   color: #999;
 }
-.msg-list .plus .operate:hover {
+.msg-list .operate:hover {
   background-color: #00a0b0;
   color: #fff;
 }
@@ -515,12 +537,12 @@ b {
   right: 10px;
   font-size: 12px;
 }
-.msg-list .list-check {
-  width: 20px;
-  height: 20px;
+.msg-list .user-avator {
+  margin-left: 20px;
 }
 .msg-list .user-info {
-  width: 680px;
+  width: 655px;
+  margin-right: 25px;
 }
 .msg-list .user-info .username {
   font-weight: 700;
@@ -532,6 +554,43 @@ b {
   text-overflow: ellipsis;
   overflow: hidden;
   margin-right: 2em;
+}
+.msg-list .user-info .msg-text .reply {
+  color: #aaa;
+  margin-right: 5px;
+}
+.checkbox-list .user-avator {
+  margin-left: 0;
+}
+.checkbox-list .list-check {
+  width: 20px;
+  height: 20px;
+}
+.msg-topic-list .msg-list-item {
+  cursor: default;
+}
+.msg-topic-list .msg-list-item a {
+  color: #333;
+}
+.msg-topic-list .msg-list-item .msg-text a {
+  color: #808080;
+}
+.msg-topic-list .msg-topic-new .msg-text a {
+  color: #026890;
+}
+.msg-topic-list .user-avator a {
+  display: block;
+}
+.msg-topic-list .operate {
+  border: 0;
+}
+.msg-topic-list .operate:hover {
+  color: #ea1429;
+  background: none;
+}
+.msg-topic-list .msg-topic-new .msg-text {
+  color: #026890;
+  font-weight: bold;
 }
 .user-avator {
   width: 60px;

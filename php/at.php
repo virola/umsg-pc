@@ -23,25 +23,6 @@ if ($result) {
 
 $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/';
 
-$action = $_GET['action'];
-if ($action == 'new') {
-    $showPopup = true;
-
-    $targetid = $_GET['uid'];
-
-    $sqltuser = 'select * from user where userid='.$targetid.';';
-    $result = mysql_query($sqltuser, $con);
-    if ($result) {
-        while($row = mysql_fetch_array($result)) {
-            $tuser = array(
-                'userid' => $row['userid'],
-                'username' => $row['username'],
-                'avator' => getAvator(),
-            );
-        }
-    }
-}
-
 $mod = 'at';
 
 ?>
@@ -63,40 +44,30 @@ $mod = 'at';
     <div class="main clear">
         <article class="ct">
             <div class="operation clear">
-                <a class="btn btn-default" href="javascript:;" id="btn-batch-del">批量删除</a>
                 <a class="btn btn-default" href="javascript:;" id="btn-mark-read">全部标记已读</a>
-                <a class="btn btn-primary fr popup-trigger" href="#" data-id="new-msg">写纸条</a>
+                <a class="btn btn-default fr" href="javascript:;" id="btn-blackuser"><i class="fa fa-ban block-ico"></i>屏蔽用户</a>
             </div>
-            <div class="operation-del hide clear">
-                <label for="delete-all" class="delete-all"><input type="checkbox" name="chkall" id="delete-all" class="checkbox">全选</label>
-                <a class="btn btn-primary" href="javascript:;" id="btn-del-confirm">确定删除</a>
-                <a class="btn btn-default btn-del-cancel" href="javascript:;">取消</a>
-            </div>
-            <div class="msg-list checkbox-list">
+            <div class="msg-list msg-topic-list">
                 <?php foreach ($msg_arr as $msg) { ?>
-                <dl data-url="show.php?uid=<?php echo $msg['userid'] ?>" class="msg-list-item clear">
-                    <dd class="list-check fl">
-                        <input type="checkbox" name="deletepm_deluid[]" class="checkbox hide" value="<?php echo $msg['userid'] ?>">
-                    </dd>
+                <dl class="msg-list-item clear <?php if(mt_rand(0, 2) < 1) {echo 'msg-topic-new';} ?>">
                     <dd class="user-avator fl">
-                        <img class="avator-round" src="<?php echo $project.$msg['avator']?>">
+                        <a href="#">
+                            <img class="avator-round" src="<?php echo $project.$msg['avator']?>">
+                        </a>
                     </dd>
                     <dt class="user-info fr">
-                        <h4 class="username"><?php echo $msg['username']?></h4>
-                        <p class="msg-text"><?php echo $msg['content']?></p>
+                        <h4 class="username"><a href="#"><?php echo $msg['username']?></a></h4>
+                        <p class="msg-text"><a href="#"><?php $rand = mt_rand(0, 2); if ($rand < 2) {?>
+                        在话题《你对暗恋对象做过什么》中@了你
+                        <?php }else{ ?>
+                        在话题《一场完美的旅行应该是这样》中回复了你
+                        <?php } ?></a>
+                        </p>
                     </dt>
                     <span class="plus">
                         <span class="dateline"><?php echo $msg['dateline']?></span>
-                        <a class="operate" href="javascript:;"><i class="fa fa-angle-down"></i></a>
-                        <?php if ($msg['newcount']) {?>
-                        <i class="bubble bubble-dot-red"><?php echo $msg['newcount']?></i>
-                        <?php }?>
+                        <a class="operate" data-command="ban" data-uid="<?php echo $msg['userid']?>" href="javascript:;"><i class="fa fa-ban"></i></a>
                     </span>
-                    <ul class="operate-list layer-menu-list hide">
-                        <li><a href="#">删除</a></li>
-                        <li><a href="#">屏蔽用户</a></li>
-                    </ul>
-                        
                 </dl>
                 <?php } ?>
             </ul>
@@ -106,34 +77,6 @@ $mod = 'at';
             <?php include("./common/side.php") ?>
         </aside>
     </div>
-</div>
-
-<div class="popup" id="popup-new-msg">
-    <h2 class="popup-title">写纸条</h2>
-    <div class="popup-content msg-form" id="new-msg-form">
-
-        <div class="form-line clear">
-                <h3 class="fl form-label">发&nbsp;&nbsp;给：</h3>
-                <div class="fl form-item">
-                    <div class="inputbox inputbox-username">
-                        <input type="text" placeholder="请输入对方用户名" class="text input" id="add-input">
-                    </div>
-                    <p class="tip-text">多个用户使用逗号、分号或回车提示系统分开</p>
-                </div>
-        </div>
-        <div class="form-line clear">
-            <h3 class="fl form-label">内&nbsp;&nbsp;容：</h3>
-            <div class="fl form-item">
-                <textarea class="textbox" name="content"></textarea>
-                <p class="num hide">还可以输入<span>300</span>字</p>
-            </div>
-        </div>
-        <div class="btn-line clear">
-            <a id="btn-send" class="btn btn-primary btn-noloading" href="javascript:;"><b class="loading"></b>发送</a>
-        </div>            
-    </div>
-
-    <a class="close" href="javascript:;"><i class="fa fa-times"></i></a>
 </div>
 
 <?php include('./common/footer.php') ?>

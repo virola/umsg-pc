@@ -224,9 +224,14 @@ $(function () {
         var target = $(ev.target);
         
         if (target.hasClass('operate') || target.parent().hasClass('operate')) {
-
+            var command = target.attr('data-command');
+            if (command == 'ban') {
+                var uid = target.attr('data-uid');
+            }
         }
         else {
+            item.removeClass('msg-topic-new');
+
             var url = item.attr('data-url');
             if (url) {
                 window.location.href = url;
@@ -325,7 +330,7 @@ $(function () {
                     var checkedVal = $.map($('.checkbox-list input:checked'), function (item) {
                         return item.value;
                     });
-                    console.log(checkedVal);
+                    // console.log(checkedVal);
                 }
             });
         }
@@ -345,7 +350,7 @@ $(function () {
                     var checkedVal = $.map($('.checkbox-list input:checked'), function (item) {
                         return item.value;
                     });
-                    console.log(checkedVal);
+                    // console.log(checkedVal);
                 }
             });
         }

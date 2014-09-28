@@ -77,7 +77,7 @@ $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/
             <div class="operation clear">
                 <a class="btn btn-default" href="javascript:;" id="btn-batch-del">批量删除</a>
                 <a class="btn btn-default" href="javascript:;" id="btn-search">搜索对话</a>
-                <a class="btn btn-default fr" href="javascript:;" id="btn-blackuser"><i class="fa fa-minus-circle block-ico"></i>屏蔽用户</a>
+                <a class="btn btn-default fr" href="javascript:;" id="btn-blackuser"><i class="fa fa-ban block-ico"></i>屏蔽用户</a>
             </div>
             <div class="operation-del hide clear">
                 <label for="delete-all" class="delete-all"><input type="checkbox" name="chkall" id="delete-all" class="checkbox">全选</label>

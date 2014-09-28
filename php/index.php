@@ -63,7 +63,6 @@ if ($action == 'new') {
     <div class="main clear">
         <article class="ct">
             <div class="operation clear">
-                <a class="btn btn-default" href="javascript:;" id="btn-batch-del">批量删除</a>
                 <a class="btn btn-default" href="javascript:;" id="btn-mark-read">全部标记已读</a>
                 <a class="btn btn-primary fr popup-trigger" href="#" data-id="new-msg">写纸条</a>
             </div>
@@ -72,7 +71,24 @@ if ($action == 'new') {
                 <a class="btn btn-primary" href="javascript:;" id="btn-del-confirm">确定删除</a>
                 <a class="btn btn-default btn-del-cancel" href="javascript:;">取消</a>
             </div>
-            <div class="msg-list checkbox-list">
+            <div class="msg-list checkbox-list" id="msg-list">
+                <dl data-url="at.php" class="msg-list-item msg-list-item-at clear msg-list-item-new">
+                    <dd class="list-check fl"></dd>
+                    <dd class="user-avator fl">
+                        <div class="ico-wrap"><i class="fa fa-at"></i></div>
+                    </dd>
+                    <dt class="user-info fr">
+                        <h4 class="username">提到我的</h4>
+                        <p class="msg-text">Luna很纠结：在帖子《你才是汉子！你全家……》里提到了你</p>
+                    </dt>
+                    <dd>
+                        <span class="plus">
+                            <span class="dateline">9月28日 10:15</span>
+                            <i class="bubble bubble-dot-red">1</i>                         
+                        </span>
+                    </dd>
+                    
+                </dl>
                 <?php foreach ($msg_arr as $msg) { ?>
                 <dl data-url="show.php?uid=<?php echo $msg['userid'] ?>" class="msg-list-item clear">
                     <dd class="list-check fl">
@@ -83,20 +99,25 @@ if ($action == 'new') {
                     </dd>
                     <dt class="user-info fr">
                         <h4 class="username"><?php echo $msg['username']?></h4>
-                        <p class="msg-text"><?php echo $msg['content']?></p>
+                        <p class="msg-text">
+                            <?php if (mt_rand(0, 2) == 1) {?>
+                            <span class="reply"><i class="fa fa-reply"></i></span>
+                            <?php } ?>
+                            <?php echo $msg['content']?></p>
                     </dt>
-                    <span class="plus">
-                        <span class="dateline"><?php echo $msg['dateline']?></span>
-                        <a class="operate" href="javascript:;"><i class="fa fa-angle-down"></i></a>
-                        <?php if ($msg['newcount']) {?>
-                        <i class="bubble bubble-dot-red"><?php echo $msg['newcount']?></i>
-                        <?php }?>
-                    </span>
-                    <ul class="operate-list layer-menu-list hide">
-                        <li><a href="#">删除</a></li>
-                        <li><a href="#">屏蔽用户</a></li>
-                    </ul>
-                        
+                    <dd>
+                        <span class="plus">
+                            <span class="dateline"><?php echo $msg['dateline']?></span>
+                            <a class="operate" href="javascript:;"><i class="fa fa-angle-down"></i></a>
+                            <?php if ($msg['newcount']) {?>
+                            <i class="bubble bubble-dot-red"><?php echo $msg['newcount']?></i>
+                            <?php }?>
+                        </span>
+                        <ul class="operate-list layer-menu-list hide">
+                            <li><a href="#">删除</a></li>
+                            <li><a href="#">屏蔽用户</a></li>
+                        </ul>
+                    </dd>
                 </dl>
                 <?php } ?>
             </ul>

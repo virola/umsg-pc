@@ -18,7 +18,7 @@ module.exports = function (grunt) {
         },
         cssmin: {
             options: {
-                banner: '/** <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> **/\n'
+                banner: '/** <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> **/'
             }
         },
         jshint: {
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
         'cssmin': {
             'page': {
                 files: {
-                    'asset/css/page.css': 'asset/css/page.css'
+                    'asset/css/main.css': 'asset/css/main.css'
                 }
             }
         },
@@ -110,6 +110,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('page-release', [
         'less:page',
+        'cssmin:page',
         'concat:page',
         'uglify:page'
     ]);
