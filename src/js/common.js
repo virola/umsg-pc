@@ -46,16 +46,30 @@ $(function () {
         }
     });
 
-
+    /**
+     * operate 操作弹出菜单的交互逻辑设定
+     */
     $(document).on('click', function (ev) {
-        $('.operate-list').hide();
-
         var target = $(ev.target);
         if (target.hasClass('operate') || target.parent().hasClass('operate')) {
-            var item = target.closest('.msg-list-item');
-            item.find('.operate-list').toggle();
 
+            var item = target.closest('.msg-item');
+            var opList = item.find('.operate-list');
+            var isShow = (opList.attr('data-open') == 'true') ? false : true;
+            
+            $('.operate-list').each(function (i, item) {
+                if ($(item).is(opList)) {
+                    opList.toggle(isShow).attr('data-open', isShow);
+                }
+                else {
+                    $(item).attr('data-open', false).hide();
+                }
+            });
+            
             return false;
+        }
+        else {
+            $('.operate-list').attr('data-open', 0).hide();
         }
     });
 

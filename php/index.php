@@ -72,53 +72,53 @@ if ($action == 'new') {
                 <a class="btn btn-default btn-del-cancel" href="javascript:;">取消</a>
             </div>
             <div class="msg-list checkbox-list" id="msg-list">
-                <dl data-url="at.php" class="msg-list-item msg-list-item-at clear msg-list-item-new">
-                    <dd class="list-check fl"></dd>
-                    <dd class="user-avator fl">
-                        <div class="ico-wrap"><i class="fa fa-at"></i></div>
-                    </dd>
-                    <dt class="user-info fr">
-                        <h4 class="username">提到我的</h4>
-                        <p class="msg-text">Luna很纠结：在帖子《你才是汉子！你全家……》里提到了你</p>
-                    </dt>
-                    <dd>
-                        <span class="plus">
-                            <span class="dateline">9月28日 10:15</span>
-                            <i class="bubble bubble-dot-red">1</i>                         
-                        </span>
-                    </dd>
-                    
-                </dl>
+                <div class="msg-item">
+                    <dl data-url="at.php" class="msg-list-item msg-list-item-at clear msg-list-item-new">
+                        <dd class="list-check fl"></dd>
+                        <dd class="user-avator fl">
+                            <div class="ico-wrap"><i class="fa fa-at"></i></div>
+                        </dd>
+                        <dt class="user-info fr">
+                            <h4 class="username">提到我的</h4>
+                            <p class="msg-text">Luna很纠结：在帖子《你才是汉子！你全家……》里提到了你</p>
+                        </dt>
+                    </dl>
+                    <span class="plus">
+                        <span class="dateline">9月28日 10:15</span>
+                        <i class="bubble bubble-dot-red">1</i>                         
+                    </span>
+                </div>
+                
                 <?php foreach ($msg_arr as $msg) { ?>
-                <dl data-url="show.php?uid=<?php echo $msg['userid'] ?>" class="msg-list-item clear">
-                    <dd class="list-check fl">
-                        <input type="checkbox" name="deletepm_deluid[]" class="checkbox hide" value="<?php echo $msg['userid'] ?>">
-                    </dd>
-                    <dd class="user-avator fl">
-                        <img class="avator-round" src="<?php echo $project.$msg['avator']?>">
-                    </dd>
-                    <dt class="user-info fr">
-                        <h4 class="username"><?php echo $msg['username']?></h4>
-                        <p class="msg-text">
-                            <?php if (mt_rand(0, 2) == 1) {?>
-                            <span class="reply"><i class="fa fa-reply"></i></span>
-                            <?php } ?>
-                            <?php echo $msg['content']?></p>
-                    </dt>
-                    <dd>
-                        <span class="plus">
-                            <span class="dateline"><?php echo $msg['dateline']?></span>
-                            <a class="operate" href="javascript:;"><i class="fa fa-angle-down"></i></a>
-                            <?php if ($msg['newcount']) {?>
-                            <i class="bubble bubble-dot-red"><?php echo $msg['newcount']?></i>
-                            <?php }?>
-                        </span>
-                        <ul class="operate-list layer-menu-list hide">
-                            <li><a href="#">删除</a></li>
-                            <li><a href="#">屏蔽用户</a></li>
-                        </ul>
-                    </dd>
-                </dl>
+                <div class="msg-item">
+                    <dl data-url="show.php?uid=<?php echo $msg['userid'] ?>" class="msg-list-item clear">
+                        <dd class="list-check fl">
+                            <input type="checkbox" name="deletepm_deluid[]" class="checkbox hide" value="<?php echo $msg['userid'] ?>">
+                        </dd>
+                        <dd class="user-avator fl">
+                            <img class="avator-round" src="<?php echo $project.$msg['avator']?>">
+                        </dd>
+                        <dt class="user-info fr">
+                            <h4 class="username"><?php echo $msg['username']?></h4>
+                            <p class="msg-text">
+                                <?php if (mt_rand(0, 2) == 1) {?>
+                                <span class="reply"><i class="fa fa-reply"></i></span>
+                                <?php } ?>
+                                <?php echo $msg['content']?></p>
+                        </dt>
+                    </dl>
+                    <span class="plus">
+                        <span class="dateline"><?php echo $msg['dateline']?></span>
+                        <a class="operate" href="javascript:;"><i class="fa fa-angle-down"></i></a>
+                        <?php if ($msg['newcount']) {?>
+                        <i class="bubble bubble-dot-red"><?php echo $msg['newcount']?></i>
+                        <?php }?>
+                    </span>
+                    <ul class="operate-list layer-menu-list hide">
+                        <li><a href="#">删除</a></li>
+                        <li><a href="#">屏蔽用户</a></li>
+                    </ul>
+                </div>
                 <?php } ?>
             </ul>
         </article>

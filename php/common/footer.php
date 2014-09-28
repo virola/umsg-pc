@@ -38,7 +38,7 @@
     </div>
 </div>
 <a id="scrolltop" title="返回顶部" class="scrolltop"><b>返回顶部</b></a>
-<span class="loading"><i class="fa fa-spinner fa-spin"></i></span>
+<div class="loading"><i class="fa fa-spinner fa-spin"></i></div>
 
 <script>
 var pageParams = {

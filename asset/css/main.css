@@ -281,6 +281,9 @@ b {
 .bold {
   font-weight: 900;
 }
+.loading {
+  display: none;
+}
 .qcode .img {
   display: block;
   width: 89px;
@@ -451,6 +454,9 @@ b {
 }
 .msg-list {
   margin: 0 0 30px;
+}
+.msg-list .msg-item {
+  position: relative;
 }
 .msg-list-item {
   cursor: pointer;
