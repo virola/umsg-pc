@@ -4,6 +4,7 @@
             <a class="title" href="index.php"><i class="fa fa-envelope"></i>消息列表</a>
             <ul class="list-sub">
                 <li class="<?php if($mod=='at') {echo 'current';} ?>"><a href="at.php"><i class="fa fa-at bold"></i>提到我的</a></li>
+                <li class="<?php if($mod=='reply') {echo 'current';} ?>"><a href="reply.php"><i class="fa fa-comment-o bold"></i>话题回复</a></li>
                 <li class="<?php if($mod=='note') {echo 'current';} ?>"><a href="note.php"><i class="fa fa-comments"></i>纸条</a></li>
             </ul>
         </li>

@@ -65,7 +65,7 @@ $mod = 'note';
             <div class="operation clear">
                 <a class="btn btn-default" href="javascript:;" id="btn-batch-del">批量删除</a>
                 <a class="btn btn-default" href="javascript:;" id="btn-mark-read">全部标记已读</a>
-                <a class="btn btn-primary fr popup-trigger" href="#" data-id="new-msg">写纸条</a>
+                <a class="btn btn-primary fr popup-trigger" href="#" data-id="new-msg"><i class="fa fa-edit"></i>写纸条</a>
             </div>
             <div class="operation-del hide clear">
                 <label for="delete-all" class="delete-all"><input type="checkbox" name="chkall" id="delete-all" class="checkbox">全选</label>
@@ -74,17 +74,20 @@ $mod = 'note';
             </div>
             <div class="msg-list checkbox-list">
                 <?php foreach ($msg_arr as $msg) { ?>
-                <dl data-url="show.php?uid=<?php echo $msg['userid'] ?>" class="msg-list-item clear">
-                    <dd class="list-check fl">
+                <div class="msg-item">
+                    <div class="list-check">
                         <input type="checkbox" name="deletepm_deluid[]" class="checkbox hide" value="<?php echo $msg['userid'] ?>">
-                    </dd>
-                    <dd class="user-avator fl">
-                        <img class="avator-round" src="<?php echo $project.$msg['avator']?>">
-                    </dd>
-                    <dt class="user-info fr">
-                        <h4 class="username"><?php echo $msg['username']?></h4>
-                        <p class="msg-text"><?php echo $msg['content']?></p>
-                    </dt>
+                    </div>
+                    <dl data-url="show.php?uid=<?php echo $msg['userid'] ?>" class="msg-list-item clear">
+                        
+                        <dd class="user-avator fl">
+                            <img class="avator-round" src="<?php echo $project.$msg['avator']?>">
+                        </dd>
+                        <dt class="user-info fr">
+                            <h4 class="username"><?php echo $msg['username']?></h4>
+                            <p class="msg-text"><?php echo $msg['content']?></p>
+                        </dt> 
+                    </dl>
                     <span class="plus">
                         <span class="dateline"><?php echo $msg['dateline']?></span>
                         <a class="operate" href="javascript:;"><i class="fa fa-angle-down"></i></a>
@@ -96,8 +99,7 @@ $mod = 'note';
                         <li><a href="#">删除</a></li>
                         <li><a href="#">屏蔽用户</a></li>
                     </ul>
-                        
-                </dl>
+                </div>
                 <?php } ?>
             </ul>
         </article>

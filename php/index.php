@@ -64,7 +64,7 @@ if ($action == 'new') {
         <article class="ct">
             <div class="operation clear">
                 <a class="btn btn-default" href="javascript:;" id="btn-mark-read">全部标记已读</a>
-                <a class="btn btn-primary fr popup-trigger" href="#" data-id="new-msg">写纸条</a>
+                <a class="btn btn-primary fr popup-trigger" href="#" data-id="new-msg"><i class="fa fa-edit"></i>写纸条</a>
             </div>
             <div class="operation-del hide clear">
                 <label for="delete-all" class="delete-all"><input type="checkbox" name="chkall" id="delete-all" class="checkbox">全选</label>
@@ -81,6 +81,23 @@ if ($action == 'new') {
                         <dt class="user-info fr">
                             <h4 class="username">提到我的</h4>
                             <p class="msg-text">Luna很纠结：在帖子《你才是汉子！你全家……》里提到了你</p>
+                        </dt>
+                    </dl>
+                    <span class="plus">
+                        <span class="dateline">9月28日 10:15</span>
+                        <i class="bubble bubble-dot-red">1</i>                         
+                    </span>
+                </div>
+
+                <div class="msg-item">
+                    <dl data-url="reply.php" class="msg-list-item msg-list-item-at clear msg-list-item-new">
+                        <dd class="list-check fl"></dd>
+                        <dd class="user-avator fl">
+                            <div class="ico-wrap"><i class="fa fa-comment-o"></i></div>
+                        </dd>
+                        <dt class="user-info fr">
+                            <h4 class="username">话题回复</h4>
+                            <p class="msg-text">小歪：在帖子《在办公室吃火锅真是感动到要哭了~超美味！》里回复到了你</p>
                         </dt>
                     </dl>
                     <span class="plus">

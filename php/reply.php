@@ -23,7 +23,7 @@ if ($result) {
 
 $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/';
 
-$mod = 'at';
+$mod = 'reply';
 
 ?>
 
@@ -57,7 +57,7 @@ $mod = 'at';
                     </dd>
                     <dt class="user-info fr">
                         <h4 class="username"><a href="#"><?php echo $msg['username']?></a></h4>
-                        <p class="msg-text"><a href="#">在话题《你对暗恋对象做过什么》中@了你</a>
+                        <p class="msg-text"><a href="#">在话题《一场完美的旅行应该是这样》中回复了你</a>
                         </p>
                     </dt>
                     <span class="plus">
