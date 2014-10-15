@@ -71,7 +71,39 @@ $(function () {
         else {
             $('.operate-list').attr('data-open', 0).hide();
         }
+
+        var command = target.attr('data-command');
+        if (command) {
+            handleListOpts(target, command);
+            return false;
+        }
     });
+
+    function handleListOpts(target, command) {
+        if (command == 'talkdel') {
+            var val = util.parseJSON(target.attr('data-value'));
+            console.log(val);
+            util.confirm({
+                modal: 1,
+                content: util.format(util.lang.index.talkDel, val.username),
+                okHandler: function (dialog) {
+                    console.log('delete talk~~');
+                } 
+            });
+        }
+
+        if (command == 'userban') {
+            var val = util.parseJSON(target.attr('data-value'));
+            console.log(val);
+            util.confirm({
+                modal: 1,
+                content: util.format(util.lang.index.userBan, val.username),
+                okHandler: function (dialog) {
+                    console.log('ban user~~');
+                } 
+            });
+        }
+    }
 
     /**
      * 写纸条的处理逻辑
@@ -360,7 +392,11 @@ var listModule = (function () {
     };
 })();
 
-
+/**
+ * 写纸条的交互逻辑模块
+ * 
+ * @type {Object}
+ */
 var newMsgModule = (function () {
     var msgForm = $('#new-msg-form');
     var touserBox = msgForm.find('.inputbox-username');

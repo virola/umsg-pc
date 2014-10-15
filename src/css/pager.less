@@ -1,0 +1,43 @@
+.pager {
+    p {
+        padding: 20px;
+
+        a {
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            margin-left: 4px;
+            padding: 0 8px;
+            height: 26px;
+            line-height: 26px;
+            border: 1px solid #ddd;
+            background: #fff no-repeat;
+            color: #333;
+            font-size: 12px;
+
+            &:hover {
+                text-decoration: none;
+                border-color: #0bafbf;
+            }
+
+            &.current {
+                border-color: #0bafbf;
+                background-color: #0bafbf;
+                color: #fff;
+            }
+
+            &.prev {
+                background-color: transparent;
+                background-image: url(http://xiaozu.94uv.com/static/image/common/arw_l.gif);
+                background-position: 50% 50%;
+                border: 0;
+            }
+
+            &.next {
+                padding-right: 25px;
+                background-image: url(http://xiaozu.94uv.com/static/image/common/arw_r.gif);
+                background-position: 90% 50%;
+            }
+        }
+    }
+}

@@ -65,6 +65,7 @@ $mod = 'note';
             <div class="operation clear">
                 <a class="btn btn-default" href="javascript:;" id="btn-batch-del">批量删除</a>
                 <a class="btn btn-default" href="javascript:;" id="btn-mark-read">全部标记已读</a>
+                <a class="btn btn-default" href="javascript:;" id="btn-blackuser"><i class="fa fa-ban block-ico"></i>屏蔽用户</a>
                 <a class="btn btn-primary fr popup-trigger" href="#" data-id="new-msg"><i class="fa fa-edit"></i>写纸条</a>
             </div>
             <div class="operation-del hide clear">
@@ -96,8 +97,8 @@ $mod = 'note';
                         <?php }?>
                     </span>
                     <ul class="operate-list layer-menu-list hide">
-                        <li><a href="#">删除</a></li>
-                        <li><a href="#">屏蔽用户</a></li>
+                        <li><a href="#" data-command="talkdel" data-value="{talkid:'<?php echo $msg['msgid'] ?>',username:'<?php echo $msg['username']?>'}">删除</a></li>
+                        <li><a href="#" data-command="userban" data-value="{uid:'<?php echo $msg['userid'] ?>',username:'<?php echo $msg['username']?>'}">屏蔽用户</a></li>
                     </ul>
                 </div>
                 <?php } ?>

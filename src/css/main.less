@@ -11,6 +11,36 @@
     margin: 0 auto;
 }
 
+.nav-top {
+    width: 100%;
+    min-width: 990px;
+    height: 30px;
+    background: #3d3c44;
+    line-height: 30px;
+    font-size: 12px;
+
+    a {
+        margin: 0 10px;
+        color: #f1f1f1;
+    }
+
+    .weixin {
+        position: relative;
+        margin: 8px 0 0 15px;
+        
+        div {
+            display: none;
+            position: absolute;
+            top: 22px;
+            right: -15px;
+            width: 208px;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    }
+}
+
 .header {
 }
 
@@ -29,3 +59,4 @@
 @import 'side';
 @import 'popup';
 @import 'list';
+@import 'pager';

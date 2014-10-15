@@ -217,6 +217,10 @@ b {
 .btn-primary:hover {
   background-color: #00b3c4;
 }
+.fa-edit {
+  font-size: 16px;
+  vertical-align: middle;
+}
 .hide {
   display: none;
 }
@@ -380,6 +384,32 @@ b {
   width: 980px;
   margin: 0 auto;
 }
+.nav-top {
+  width: 100%;
+  min-width: 990px;
+  height: 30px;
+  background: #3d3c44;
+  line-height: 30px;
+  font-size: 12px;
+}
+.nav-top a {
+  margin: 0 10px;
+  color: #f1f1f1;
+}
+.nav-top .weixin {
+  position: relative;
+  margin: 8px 0 0 15px;
+}
+.nav-top .weixin div {
+  display: none;
+  position: absolute;
+  top: 22px;
+  right: -15px;
+  width: 208px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
 .logo {
   margin: 30px;
 }
@@ -400,6 +430,9 @@ b {
   width: 780px;
   float: right;
 }
+.main .ct .pager {
+  margin-bottom: 30px;
+}
 .main .side {
   float: left;
   overflow: hidden;
@@ -412,7 +445,8 @@ b {
 .operation,
 .operation-del,
 .operation-search {
-  margin: 10px;
+  margin: 10px 0;
+  padding: 0 10px 10px 0;
   line-height: 30px;
   margin-left: 0;
 }
@@ -453,7 +487,7 @@ b {
   margin-left: 20px;
 }
 .msg-list {
-  margin: 0 0 30px;
+  margin: 0;
 }
 .msg-list .msg-item {
   position: relative;
@@ -475,10 +509,16 @@ b {
   border-radius: 2px;
   border: 1px solid;
   border-color: #F2F2F2 #EEE #EEE #F2F2F2;
-  background: #5bb4da;
   font-size: 40px;
   line-height: 50px;
   color: #fff;
+}
+.msg-list-item-at .ico-wrap .fa-at {
+  background: #5bb4da;
+}
+.msg-list-item-at .ico-wrap .fa-comment-o {
+  background-color: #35b87f;
+  font-size: 36px;
 }
 .msg-list-item-new {
   background-color: #f2f2f2;
@@ -571,6 +611,12 @@ b {
 .checkbox-list .list-check {
   width: 20px;
   height: 20px;
+  position: absolute;
+  z-index: 10;
+  top: 12px;
+}
+.checkbox-list dl {
+  padding-left: 20px;
 }
 .msg-topic-list .msg-list-item {
   cursor: default;
@@ -862,6 +908,7 @@ b {
 }
 .msg-form .form-item {
   width: 335px;
+  position: relative;
 }
 .msg-form .btn-line {
   text-align: right;
@@ -874,6 +921,28 @@ b {
   _font-family: 'SimSun';
   background-color: #E5F1F5;
   border-radius: 2px;
+}
+.suggest-wrap {
+  position: absolute;
+  top: 26px;
+  background: #fff;
+  border: 1px solid #ddd;
+  z-index: 10;
+  padding: 2px;
+}
+.suggest-wrap li {
+  line-height: 25px;
+}
+.suggest-wrap li a {
+  font-size: 12px;
+  display: block;
+  color: #666;
+  padding: 0 5px;
+}
+.suggest-wrap li a:hover {
+  background-color: #f1f1f1;
+  color: #00a0b0;
+  text-decoration: none;
 }
 .chat-ct .title {
   border-bottom: 2px solid #00a0b0;
@@ -1050,4 +1119,40 @@ b {
 .load-more-end {
   cursor: default;
   background: none;
+}
+.pager p {
+  padding: 20px;
+}
+.pager p a {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  margin-left: 4px;
+  padding: 0 8px;
+  height: 26px;
+  line-height: 26px;
+  border: 1px solid #ddd;
+  background: #ffffff no-repeat;
+  color: #333;
+  font-size: 12px;
+}
+.pager p a:hover {
+  text-decoration: none;
+  border-color: #0bafbf;
+}
+.pager p a.current {
+  border-color: #0bafbf;
+  background-color: #0bafbf;
+  color: #fff;
+}
+.pager p a.prev {
+  background-color: transparent;
+  background-image: url(http://xiaozu.94uv.com/static/image/common/arw_l.gif);
+  background-position: 50% 50%;
+  border: 0;
+}
+.pager p a.next {
+  padding-right: 25px;
+  background-image: url(http://xiaozu.94uv.com/static/image/common/arw_r.gif);
+  background-position: 90% 50%;
 }

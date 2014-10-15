@@ -101,6 +101,19 @@ var util = (function () {
 
     var exports = {};
 
+    exports.lang = {
+        index: {
+            talkDel: '确认要删除与 #{0} 的对话记录吗？',
+            userBan: '确认要将 #{0} 加入屏蔽用户列表吗？您将收不到对方发来的纸条'
+        },
+        message: {
+            batchDel: '确认要删除这些对话记录吗？'
+        },
+        talk: {
+            userBan: '确认要将 #{0} 加入屏蔽用户列表吗？您将收不到对方发来的纸条'
+        }
+    };
+
     var ICON_FONTAWESOME = {
         confirm: 'fa fa-question-circle'
     };
@@ -125,7 +138,14 @@ var util = (function () {
                     text: '确定',
                     skin: 'primary',
                     handler: function () {
-                        params.okHandler && params.okHandler.call(this);
+                        var result;
+                        if (params.okHandler) {
+                            result = params.okHandler.call(this);
+                        }
+
+                        if (result !== false) {
+                            this.hide();
+                        }
                     }
                 }
             ]
@@ -191,6 +211,22 @@ var util = (function () {
             });
         }
         return source;
+    };
+
+    /**
+     * 将字符串解析成 JSON 对象
+     * 
+     * @memberof module:util
+     * @param {string} data 需要解析的字符串
+     * @return {Object} 解析结果 JSON 对象
+     */
+    exports.parseJSON = function (data) {
+        try {
+            return (new Function('return (' + data + ')'))();
+        }
+        catch (e) {
+            return {};
+        }
     };
 
     return exports;
@@ -264,7 +300,39 @@ $(function () {
         else {
             $('.operate-list').attr('data-open', 0).hide();
         }
+
+        var command = target.attr('data-command');
+        if (command) {
+            handleListOpts(target, command);
+            return false;
+        }
     });
+
+    function handleListOpts(target, command) {
+        if (command == 'talkdel') {
+            var val = util.parseJSON(target.attr('data-value'));
+            console.log(val);
+            util.confirm({
+                modal: 1,
+                content: util.format(util.lang.index.talkDel, val.username),
+                okHandler: function (dialog) {
+                    console.log('delete talk~~');
+                } 
+            });
+        }
+
+        if (command == 'userban') {
+            var val = util.parseJSON(target.attr('data-value'));
+            console.log(val);
+            util.confirm({
+                modal: 1,
+                content: util.format(util.lang.index.userBan, val.username),
+                okHandler: function (dialog) {
+                    console.log('ban user~~');
+                } 
+            });
+        }
+    }
 
     /**
      * 写纸条的处理逻辑
@@ -553,7 +621,11 @@ var listModule = (function () {
     };
 })();
 
-
+/**
+ * 写纸条的交互逻辑模块
+ * 
+ * @type {Object}
+ */
 var newMsgModule = (function () {
     var msgForm = $('#new-msg-form');
     var touserBox = msgForm.find('.inputbox-username');

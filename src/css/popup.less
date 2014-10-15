@@ -144,6 +144,7 @@
 
     .form-item {
         width: 390px - 55px;
+        position: relative;
     }
 
     .btn-line {
@@ -160,4 +161,30 @@
     _font-family: 'SimSun';
     background-color: #E5F1F5;
     border-radius: 2px;
+}
+
+.suggest-wrap {
+    position: absolute;
+    top: 26px;
+    background: #fff;
+    border: 1px solid #ddd;
+    z-index: 10;
+    padding: 2px;
+
+    li {
+        line-height: 25px;
+
+        a {
+            font-size: 12px;
+            display: block;
+            color: #666;
+            padding: 0 5px;
+
+            &:hover {
+                background-color: #f1f1f1;
+                color: @em-color;
+                text-decoration: none;
+            }
+        }
+    }
 }

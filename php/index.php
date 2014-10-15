@@ -2,14 +2,15 @@
 include "../../umsg/common/db.php";
 
 $user = $common['user'];
-$sql = 'select toid, username, authorid, max(dateline) as timeline, count(*) as msgcount from message,user where delstatus=0 and message.toid=1 and message.authorid=user.userid group by authorid order by dateline desc  limit 0,10';
-$sqljoin = 'select toid, authorid, content, max(dateline) as timeline, count(*) as msgcount, username from message,user where delstatus=0 and message.toid='.$user['userid'].' and authorid=userid group by authorid order by timeline desc;';
+// $sql = 'select toid, username, authorid, max(dateline) as timeline, count(*) as msgcount from message,user where delstatus=0 and message.toid=1 and message.authorid=user.userid group by authorid order by dateline desc  limit 0,10';
+$sqljoin = 'select pmid, toid, authorid, content, max(dateline) as timeline, count(*) as msgcount, username from message,user where delstatus=0 and message.toid='.$user['userid'].' and authorid=userid group by authorid order by timeline desc;';
 $result = mysql_query($sqljoin);
 $msg_arr = array();
 
 if ($result) {
     while($row = mysql_fetch_array($result)) {
         $msg_arr[] = array(
+            'msgid' => $row['pmid'],
             'userid' => $row['authorid'],
             'username' => $row['username'],
             'content' => getLatestMsg($row['authorid'], $user['userid'], $con),
@@ -71,7 +72,7 @@ if ($action == 'new') {
                 <a class="btn btn-primary" href="javascript:;" id="btn-del-confirm">确定删除</a>
                 <a class="btn btn-default btn-del-cancel" href="javascript:;">取消</a>
             </div>
-            <div class="msg-list checkbox-list" id="msg-list">
+            <div class="msg-list" id="msg-list">
                 <div class="msg-item">
                     <dl data-url="at.php" class="msg-list-item msg-list-item-at clear msg-list-item-new">
                         <dd class="list-check fl"></dd>
@@ -132,12 +133,14 @@ if ($action == 'new') {
                         <?php }?>
                     </span>
                     <ul class="operate-list layer-menu-list hide">
-                        <li><a href="#">删除</a></li>
-                        <li><a href="#">屏蔽用户</a></li>
+                        <li><a href="#" data-command="talkdel" data-value="{talkid:'<?php echo $msg['msgid'] ?>',username:'<?php echo $msg['username']?>'}">删除</a></li>
+                        <li><a href="#" data-command="userban" data-value="{uid:'<?php echo $msg['userid'] ?>',username:'<?php echo $msg['username']?>'}">屏蔽用户</a></li>
                     </ul>
                 </div>
                 <?php } ?>
-            </ul>
+            </div>
+
+            <?php include("./common/pager.php") ?>
         </article>
 
         <aside class="side">
@@ -156,6 +159,12 @@ if ($action == 'new') {
                     <div class="inputbox inputbox-username">
                         <input type="text" placeholder="请输入对方用户名" class="text input" id="add-input">
                     </div>
+                    <ul class="suggest-wrap">
+                        <li><a href="javascript:;">admin</a></li>
+                        <li><a href="javascript:;">有节操</a></li>
+                        <li><a href="javascript:;">没什么</a></li>
+                        <li><a href="javascript:;">冷笑话精选</a></li>
+                    </ul>
                     <p class="tip-text">多个用户使用逗号、分号或回车提示系统分开</p>
                 </div>
         </div>
