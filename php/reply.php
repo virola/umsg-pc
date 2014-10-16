@@ -44,7 +44,7 @@ $mod = 'reply';
     <div class="main clear">
         <article class="ct">
             <div class="operation clear">
-                <a class="btn btn-default" href="javascript:;" id="btn-mark-read" data-command="markread">全部标记已读</a>
+                <a class="btn btn-default" href="javascript:;" id="btn-mark-read" data-command="markread" data-url="#">全部标记已读</a>
                 <a class="btn btn-default fr" href="javascript:;" id="btn-blackuser"><i class="fa fa-ban block-ico"></i>屏蔽用户</a>
             </div>
             <div class="msg-list msg-topic-list">

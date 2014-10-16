@@ -42,6 +42,13 @@
 
 <script>
 var pageParams = {
+    ajaxUrl: {
+        banUser: '#',
+        delTalk: '#',
+        delTalkBatch: '#',
+        delMsgBatch: '#',
+        postMessage: '#'
+    },
     isNew: '<?php echo $showPopup?>',
     tousername: '<?php echo $tuser['username']?>'
 };

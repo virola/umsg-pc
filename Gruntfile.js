@@ -76,7 +76,8 @@ module.exports = function (grunt) {
                     'asset/js/main.js': [
                         'src/js/common/Dialog.js',
                         'src/js/common/util.js',
-                        'src/js/main.js'
+                        'src/js/main.js',
+                        'src/js/content.js'
                     ]
                 }
             }

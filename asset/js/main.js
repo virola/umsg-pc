@@ -237,6 +237,17 @@ var pageParams = window.pageParams || {};
 
 $(function () {
 
+    /**
+     * for common header
+     */ 
+    // add redirect
+    $('.uc-redirect-add').each(function (i, item) {
+        var curUrl = encodeURIComponent(window.location.href);
+        var url =  $(item).attr('href');
+        url += (url.indexOf('?') > -1 ? '&' : '?') + 'redirect_url=' +  curUrl;
+        $(item).attr('href', url);
+    });
+
     // scroll top
     var scrollDom = $('#scrolltop');
     $(window).on('scroll', function () {
@@ -261,10 +272,7 @@ $(function () {
         var target = $(ev.target);
         
         if (target.hasClass('operate') || target.parent().hasClass('operate')) {
-            var command = target.attr('data-command');
-            if (command == 'ban') {
-                var uid = target.attr('data-uid');
-            }
+            // nothing..
         }
         else {
             item.removeClass('msg-topic-new');
@@ -312,36 +320,57 @@ $(function () {
     function handleListOpts(target, command) {
         var dataVal = target.attr('data-value') || '{}';
         var val = util.parseJSON(dataVal);
-        console.log(val);
+        var url;
+
         if (command == 'talkdel') {
+            url = pageParams.ajaxUrl.banUser;
             util.confirm({
                 modal: 1,
                 content: util.format(util.lang.index.talkDel, val.username),
                 okHandler: function (dialog) {
-                    console.log('delete talk~~');
+                    $.post(url, val, function (resp) {
+                        // success
+                        window.location.reload();
+                    });
                 } 
             });
         }
 
         if (command == 'userban') {
+            url = pageParams.ajaxUrl.delTalk;
+
             util.confirm({
                 modal: 1,
                 content: util.format(util.lang.index.userBan, val.username),
                 okHandler: function (dialog) {
-                    console.log('ban user~~');
+                    $.post(url, val, function (resp) {
+                        // success
+                        window.location.reload();
+                    });
                 } 
             });
         }
 
         if (command == 'markread') {
+            var url = target.attr('data-url');
+
             util.confirm({
                 title: '标记已读',
                 modal: 1,
                 content: util.lang.index.markread,
                 okHandler: function (dialog) {
-                    console.log('markread');
+                    $.post(url, val, function (resp) {
+                        // success
+                        window.location.reload();
+                    });
                 } 
             });
+        }
+
+        // 屏蔽用户管理
+        if (command == 'blackmanage') {
+            // todo 
+            // 弹出层
         }
     }
 
@@ -409,6 +438,8 @@ $(function () {
     });
 
     var confirmDialog;
+
+    // talk delete
     $('#btn-del-confirm').on('click', function () {
         // to delete
         if (confirmDialog) {
@@ -423,27 +454,18 @@ $(function () {
                     var checkedVal = $.map($('.checkbox-list input:checked'), function (item) {
                         return item.value;
                     });
-                    // console.log(checkedVal);
-                }
-            });
-        }
-    });
+                    if (!checkedVal.length) {
+                        return;
+                    }
 
-    $('.btn-delpm-confirm').on('click', function () {
-        // to delete
-        if (confirmDialog) {
-            confirmDialog.show();
-        }
-        else {
-            confirmDialog = util.confirm({
-                content: '确认要删除这些对话记录吗？',
-                modal: 1,
-                okHandler: function () {
-                    var dialog = this;
-                    var checkedVal = $.map($('.checkbox-list input:checked'), function (item) {
-                        return item.value;
+                    var url = pageParams.ajaxUrl.delTalkBatch;
+                    $.post(url, {
+                        data: checkedVal
+                    }, function (resp) {
+                        // success
+                        window.location.reload();
                     });
-                    // console.log(checkedVal);
+
                 }
             });
         }
@@ -460,53 +482,37 @@ $(function () {
         searchOperation.hide();
         msgFormWrap.show();
     });
-    
-    /**
-     * message list 页面逻辑处理
-     */
-    var replyForm = $('#chat-sendmsg-form');
-    var replyText = $('#chat-sendmsg-box').find('.txt');
-    var replyTextWrap = replyText.parent();
-    var replyBtn = $('#form-send-btn');
-
-    replyText.on('focusin', function () {
-        replyTextWrap.addClass('msg-textbox-focus');
-        replyText.addClass('textarea-expanded');
-        replyBtn.parent().removeClass('hide');
-    }).on('focusout', function () {
-        replyTextWrap.removeClass('msg-textbox-focus');
-    });
-
-    replyBtn.on('click', function () {
-        var url = replyForm.attr('action');
-        var content = $.trim(replyText.val());
-
-        if (!content) {
-            return false;
-        }
-
-        $.ajax({
-            type: 'post',
-            url: url,
-            data: {
-                content: content
-            },
-            dataType: 'json',
-            success: function (data) {
-                if (data && data.status === 0) {
-                    window.location.reload();
-                }
-            }
-        });
-
-        return false;
-    });
-
-    listModule.init();
-
-    var appl = $('.appl');
 
 });
+
+
+/**
+ * 写纸条的交互逻辑模块
+ * 
+ * @type {Object}
+ */
+var newMsgModule = (function () {
+    var msgForm = $('#new-msg-form');
+    var touserBox = msgForm.find('.inputbox-username');
+    var addInput = msgForm.find('#add-input');
+    var textarea = msgForm.find('textarea');
+    var sendBtn = msgForm.find('#btn-send');
+
+    function bindSend() {
+        sendBtn.on('click', function () {
+            // todo $.ajax({});
+        });
+    }
+
+    return {
+        init: function () {
+            bindSend();
+        }
+    };
+
+})();
+
+
 
 /**
  * 加载更多消息列表
@@ -632,30 +638,83 @@ var listModule = (function () {
     };
 })();
 
-/**
- * 写纸条的交互逻辑模块
- * 
- * @type {Object}
- */
-var newMsgModule = (function () {
-    var msgForm = $('#new-msg-form');
-    var touserBox = msgForm.find('.inputbox-username');
-    var addInput = msgForm.find('#add-input');
-    var textarea = msgForm.find('textarea');
-    var sendBtn = msgForm.find('#btn-send');
+$(function () {
 
-    function bindSend() {
-        sendBtn.on('click', function () {
-            // todo $.ajax({});
-        });
-    }
 
-    return {
-        init: function () {
-            bindSend();
+    /**
+     * message list 页面逻辑处理
+     */
+    
+    var confirmDialog;
+
+    // messaga delete
+    $('.btn-delpm-confirm').on('click', function () {
+        if (confirmDialog) {
+            confirmDialog.show();
         }
-    };
+        else {
+            confirmDialog = util.confirm({
+                content: '确认要删除这些对话记录吗？',
+                modal: 1,
+                okHandler: function () {
+                    var dialog = this;
+                    var checkedVal = $.map($('.checkbox-list input:checked'), function (item) {
+                        return item.value;
+                    });
 
-})();
+                    if (checkedVal.length) {
+                        $.post(pageParams.ajaxUrl.delMsgBatch, {
+                            data: checkedVal
+                        }, function (resp) {
+                            // success
+                            window.location.reload();
+                        });
+                    }
+                }
+            });
+        }
+    });
 
+    var replyForm = $('#chat-sendmsg-form');
+    var replyText = $('#chat-sendmsg-box').find('.txt');
+    var replyTextWrap = replyText.parent();
+    var replyBtn = $('#form-send-btn');
 
+    replyText.on('focusin', function () {
+        replyTextWrap.addClass('msg-textbox-focus');
+        replyText.addClass('textarea-expanded');
+        replyBtn.parent().removeClass('hide');
+    }).on('focusout', function () {
+        replyTextWrap.removeClass('msg-textbox-focus');
+    });
+
+    replyBtn.on('click', function () {
+        var url = replyForm.attr('action');
+        var content = $.trim(replyText.val());
+
+        if (!content) {
+            return false;
+        }
+
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: {
+                content: content
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data && data.status === 0) {
+                    window.location.reload();
+                }
+            }
+        });
+
+        return false;
+    });
+
+    listModule.init();
+
+    var appl = $('.appl');
+
+});

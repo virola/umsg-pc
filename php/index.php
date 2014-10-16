@@ -64,13 +64,8 @@ if ($action == 'new') {
     <div class="main clear">
         <article class="ct">
             <div class="operation clear">
-                <a class="btn btn-default" href="javascript:;" id="btn-mark-read" data-command="markread">全部标记已读</a>
+                <a class="btn btn-default" href="javascript:;" id="btn-mark-read" data-command="markread" data-url="#">全部标记已读</a>
                 <a class="btn btn-primary fr popup-trigger" href="#" data-id="new-msg"><i class="fa fa-edit"></i>写纸条</a>
-            </div>
-            <div class="operation-del hide clear">
-                <label for="delete-all" class="delete-all"><input type="checkbox" name="chkall" id="delete-all" class="checkbox">全选</label>
-                <a class="btn btn-primary" href="javascript:;" id="btn-del-confirm">确定删除</a>
-                <a class="btn btn-default btn-del-cancel" href="javascript:;">取消</a>
             </div>
             <div class="msg-list" id="msg-list">
                 <div class="msg-item">

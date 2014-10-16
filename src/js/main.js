@@ -7,6 +7,17 @@ var pageParams = window.pageParams || {};
 
 $(function () {
 
+    /**
+     * for common header
+     */ 
+    // add redirect
+    $('.uc-redirect-add').each(function (i, item) {
+        var curUrl = encodeURIComponent(window.location.href);
+        var url =  $(item).attr('href');
+        url += (url.indexOf('?') > -1 ? '&' : '?') + 'redirect_url=' +  curUrl;
+        $(item).attr('href', url);
+    });
+
     // scroll top
     var scrollDom = $('#scrolltop');
     $(window).on('scroll', function () {
@@ -31,10 +42,7 @@ $(function () {
         var target = $(ev.target);
         
         if (target.hasClass('operate') || target.parent().hasClass('operate')) {
-            var command = target.attr('data-command');
-            if (command == 'ban') {
-                var uid = target.attr('data-uid');
-            }
+            // nothing..
         }
         else {
             item.removeClass('msg-topic-new');
@@ -82,36 +90,57 @@ $(function () {
     function handleListOpts(target, command) {
         var dataVal = target.attr('data-value') || '{}';
         var val = util.parseJSON(dataVal);
-        console.log(val);
+        var url;
+
         if (command == 'talkdel') {
+            url = pageParams.ajaxUrl.banUser;
             util.confirm({
                 modal: 1,
                 content: util.format(util.lang.index.talkDel, val.username),
                 okHandler: function (dialog) {
-                    console.log('delete talk~~');
+                    $.post(url, val, function (resp) {
+                        // success
+                        window.location.reload();
+                    });
                 } 
             });
         }
 
         if (command == 'userban') {
+            url = pageParams.ajaxUrl.delTalk;
+
             util.confirm({
                 modal: 1,
                 content: util.format(util.lang.index.userBan, val.username),
                 okHandler: function (dialog) {
-                    console.log('ban user~~');
+                    $.post(url, val, function (resp) {
+                        // success
+                        window.location.reload();
+                    });
                 } 
             });
         }
 
         if (command == 'markread') {
+            var url = target.attr('data-url');
+
             util.confirm({
                 title: '标记已读',
                 modal: 1,
                 content: util.lang.index.markread,
                 okHandler: function (dialog) {
-                    console.log('markread');
+                    $.post(url, val, function (resp) {
+                        // success
+                        window.location.reload();
+                    });
                 } 
             });
+        }
+
+        // 屏蔽用户管理
+        if (command == 'blackmanage') {
+            // todo 
+            // 弹出层
         }
     }
 
@@ -179,6 +208,8 @@ $(function () {
     });
 
     var confirmDialog;
+
+    // talk delete
     $('#btn-del-confirm').on('click', function () {
         // to delete
         if (confirmDialog) {
@@ -193,27 +224,18 @@ $(function () {
                     var checkedVal = $.map($('.checkbox-list input:checked'), function (item) {
                         return item.value;
                     });
-                    // console.log(checkedVal);
-                }
-            });
-        }
-    });
+                    if (!checkedVal.length) {
+                        return;
+                    }
 
-    $('.btn-delpm-confirm').on('click', function () {
-        // to delete
-        if (confirmDialog) {
-            confirmDialog.show();
-        }
-        else {
-            confirmDialog = util.confirm({
-                content: '确认要删除这些对话记录吗？',
-                modal: 1,
-                okHandler: function () {
-                    var dialog = this;
-                    var checkedVal = $.map($('.checkbox-list input:checked'), function (item) {
-                        return item.value;
+                    var url = pageParams.ajaxUrl.delTalkBatch;
+                    $.post(url, {
+                        data: checkedVal
+                    }, function (resp) {
+                        // success
+                        window.location.reload();
                     });
-                    // console.log(checkedVal);
+
                 }
             });
         }
@@ -230,177 +252,9 @@ $(function () {
         searchOperation.hide();
         msgFormWrap.show();
     });
-    
-    /**
-     * message list 页面逻辑处理
-     */
-    var replyForm = $('#chat-sendmsg-form');
-    var replyText = $('#chat-sendmsg-box').find('.txt');
-    var replyTextWrap = replyText.parent();
-    var replyBtn = $('#form-send-btn');
-
-    replyText.on('focusin', function () {
-        replyTextWrap.addClass('msg-textbox-focus');
-        replyText.addClass('textarea-expanded');
-        replyBtn.parent().removeClass('hide');
-    }).on('focusout', function () {
-        replyTextWrap.removeClass('msg-textbox-focus');
-    });
-
-    replyBtn.on('click', function () {
-        var url = replyForm.attr('action');
-        var content = $.trim(replyText.val());
-
-        if (!content) {
-            return false;
-        }
-
-        $.ajax({
-            type: 'post',
-            url: url,
-            data: {
-                content: content
-            },
-            dataType: 'json',
-            success: function (data) {
-                if (data && data.status === 0) {
-                    window.location.reload();
-                }
-            }
-        });
-
-        return false;
-    });
-
-    listModule.init();
-
-    var appl = $('.appl');
 
 });
 
-/**
- * 加载更多消息列表
- * @type {Object}
- */
-var listModule = (function () {
-    
-    var loadMoreBtn = $('#talk-msg-load');
-    var talkList = $('#talk-msg-list');
-
-    var page = 1;
-    var isAjax;
-    var TALK_URL = talkList.attr('data-url');
-    var isLoadend;
-    var isDelMode;
-
-    var loading = {
-        load: function () {
-            loadMoreBtn.attr('data-loading', 1).text('加载中...');
-        },
-        success: function () {
-            loadMoreBtn.attr('data-loading', 0).text('点击加载更多...');
-        },
-        complete: function () {
-            loadMoreBtn.addClass('load-more-end').attr('data-loading', 0).text('已加载完毕');
-        }
-    };
-
-    function loadList(page) {
-        if (isAjax) {
-            return false;
-        }
-        var url = TALK_URL + '&page=' + page;
-        isAjax = 1;
-        loading.load();
-
-        $.ajax({
-            url: url,
-            dataType: 'json',
-            success: function (json) {
-                setTimeout(function () {
-
-                    isAjax = 0;
-                    
-                    if (json.status === 0) {
-                        renderList(json.data.list || []);
-                        loading.success();
-                        if (json.data.loadend) {
-                            isLoadend = 1;
-                            loading.complete();
-                        }
-                    }
-                }, 1000);
-                
-            },
-            failure: function () {
-                isAjax = 0;
-            }
-        });
-    }
-
-    var _tpl = ''
-        + '<li class="talk-msg-item clear">'
-        +     '<fieldset class="date-talk">'
-        +         '<legend class="time-title">#{dateline}</legend>'
-        +     '</fieldset>'
-        +     '<section class="#{talkStyle} clear">'
-        +         '<a class="avatar-talk user-avator" href="#{url}" title="#{username}">'
-        +             '<img class="avator-round" src="#{avator}">'
-        +         '</a>'
-        +         '<div class="content-talk">'
-        +             '<div class="msg-arrow">'
-        +               '<em class="line-c">◆</em><span class="bg-c">◆</span>'
-        +             '</div>'
-        +             '<div class="msg-dialog-box">'
-        +                 '<input type="checkbox" name="deletepm_delid[]" class="checkbox #{delStyle}" value="#{pmid}">'
-        +                 '<p class="msg-dialog-text">#{content}</p>'
-        +             '</div>'
-        +         '</div>'
-        +     '</section>'
-        + '</li>';
-
-    function renderList(list) {
-        var html = [];
-        $.each(list, function (i, data) {
-            data.talkStyle = 'guest-talk';
-            if (data.issend) {
-                data.talkStyle = 'me-talk';
-            }
-            data.delStyle = 'hide';
-            if (isDelMode) {
-                data.delStyle = '';
-            }
-
-            html[i] = util.format(_tpl, data);
-        });
-
-        talkList.append(html.join(''));
-
-        if (html.length) {
-            $('.operation-del').removeClass('hide-forever');
-        }
-    }
-
-    function bindClicker() {
-        loadMoreBtn.on('click', function () {
-            if (isLoadend) {
-                return false;
-            }
-            loadList(++page);
-        });
-    }
-
-    return {
-        init: function () {
-            if (talkList.size()) {
-                bindClicker();
-            }
-        },
-        setDelMode: function (bool) {
-            isDelMode = bool;
-        }
-    };
-})();
 
 /**
  * 写纸条的交互逻辑模块

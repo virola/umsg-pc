@@ -64,8 +64,8 @@ $mod = 'note';
         <article class="ct">
             <div class="operation clear">
                 <a class="btn btn-default" href="javascript:;" id="btn-batch-del">批量删除</a>
-                <a class="btn btn-default" href="javascript:;" id="btn-mark-read" data-command="markread">全部标记已读</a>
-                <a class="btn btn-default" href="javascript:;" id="btn-blackuser"><i class="fa fa-ban block-ico"></i>屏蔽用户</a>
+                <a class="btn btn-default" href="javascript:;" id="btn-mark-read" data-command="markread" data-url="#">全部标记已读</a>
+                <a class="btn btn-default" href="javascript:;" id="btn-blackuser" data-comman="blackmanage"><i class="fa fa-ban block-ico"></i>屏蔽用户</a>
                 <a class="btn btn-primary fr popup-trigger" href="#" data-id="new-msg"><i class="fa fa-edit"></i>写纸条</a>
             </div>
             <div class="operation-del hide clear">
