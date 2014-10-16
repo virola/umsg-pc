@@ -122,7 +122,7 @@ $(function () {
         }
 
         if (command == 'markread') {
-            var url = target.attr('data-url');
+            url = target.attr('data-url');
 
             util.confirm({
                 title: '标记已读',
@@ -190,7 +190,6 @@ $(function () {
         delOperation.show();
         $('.checkbox-list input:checkbox').show();
         msgFormWrap.hide();
-        listModule.setDelMode(true);
     });
 
     $('.btn-del-cancel').on('click', function () {
@@ -198,7 +197,6 @@ $(function () {
         delOperation.hide();
         $('.checkbox-list input:checkbox').hide();
         msgFormWrap.show();
-        listModule.setDelMode(false);
     });
 
     checkAllBox.on('click', function () {

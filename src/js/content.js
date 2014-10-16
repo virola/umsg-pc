@@ -1,6 +1,8 @@
 /**
  * @file 消息列表文件逻辑处理
  */
+var util = window.util || {};
+var pageParams = window.pageParams || {};
 
 /**
  * 加载更多消息列表
@@ -202,6 +204,14 @@ $(function () {
     });
 
     listModule.init();
+
+    $('#btn-batch-del').on('click', function () {
+        listModule.setDelMode(true);
+    });
+
+    $('.btn-del-cancel').on('click', function () {
+        listModule.setDelMode(false);
+    });
 
     var appl = $('.appl');
 
