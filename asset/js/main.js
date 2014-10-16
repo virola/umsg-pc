@@ -104,7 +104,8 @@ var util = (function () {
     exports.lang = {
         index: {
             talkDel: '确认要删除与 #{0} 的对话记录吗？',
-            userBan: '确认要将 #{0} 加入屏蔽用户列表吗？您将收不到对方发来的纸条'
+            userBan: '确认要将 #{0} 加入屏蔽用户列表吗？您将收不到对方发来的纸条',
+            markread: '您确定要将所有消息的状态置为已读吗？'
         },
         message: {
             batchDel: '确认要删除这些对话记录吗？'
@@ -309,9 +310,10 @@ $(function () {
     });
 
     function handleListOpts(target, command) {
+        var dataVal = target.attr('data-value') || '{}';
+        var val = util.parseJSON(dataVal);
+        console.log(val);
         if (command == 'talkdel') {
-            var val = util.parseJSON(target.attr('data-value'));
-            console.log(val);
             util.confirm({
                 modal: 1,
                 content: util.format(util.lang.index.talkDel, val.username),
@@ -322,13 +324,22 @@ $(function () {
         }
 
         if (command == 'userban') {
-            var val = util.parseJSON(target.attr('data-value'));
-            console.log(val);
             util.confirm({
                 modal: 1,
                 content: util.format(util.lang.index.userBan, val.username),
                 okHandler: function (dialog) {
                     console.log('ban user~~');
+                } 
+            });
+        }
+
+        if (command == 'markread') {
+            util.confirm({
+                title: '标记已读',
+                modal: 1,
+                content: util.lang.index.markread,
+                okHandler: function (dialog) {
+                    console.log('markread');
                 } 
             });
         }

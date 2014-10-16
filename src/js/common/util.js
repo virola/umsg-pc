@@ -9,7 +9,8 @@ var util = (function () {
     exports.lang = {
         index: {
             talkDel: '确认要删除与 #{0} 的对话记录吗？',
-            userBan: '确认要将 #{0} 加入屏蔽用户列表吗？您将收不到对方发来的纸条'
+            userBan: '确认要将 #{0} 加入屏蔽用户列表吗？您将收不到对方发来的纸条',
+            markread: '您确定要将所有消息的状态置为已读吗？'
         },
         message: {
             batchDel: '确认要删除这些对话记录吗？'

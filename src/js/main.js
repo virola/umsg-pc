@@ -80,9 +80,10 @@ $(function () {
     });
 
     function handleListOpts(target, command) {
+        var dataVal = target.attr('data-value') || '{}';
+        var val = util.parseJSON(dataVal);
+        console.log(val);
         if (command == 'talkdel') {
-            var val = util.parseJSON(target.attr('data-value'));
-            console.log(val);
             util.confirm({
                 modal: 1,
                 content: util.format(util.lang.index.talkDel, val.username),
@@ -93,13 +94,22 @@ $(function () {
         }
 
         if (command == 'userban') {
-            var val = util.parseJSON(target.attr('data-value'));
-            console.log(val);
             util.confirm({
                 modal: 1,
                 content: util.format(util.lang.index.userBan, val.username),
                 okHandler: function (dialog) {
                     console.log('ban user~~');
+                } 
+            });
+        }
+
+        if (command == 'markread') {
+            util.confirm({
+                title: '标记已读',
+                modal: 1,
+                content: util.lang.index.markread,
+                okHandler: function (dialog) {
+                    console.log('markread');
                 } 
             });
         }

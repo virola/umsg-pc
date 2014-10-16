@@ -64,7 +64,7 @@ if ($action == 'new') {
     <div class="main clear">
         <article class="ct">
             <div class="operation clear">
-                <a class="btn btn-default" href="javascript:;" id="btn-mark-read">全部标记已读</a>
+                <a class="btn btn-default" href="javascript:;" id="btn-mark-read" data-command="markread">全部标记已读</a>
                 <a class="btn btn-primary fr popup-trigger" href="#" data-id="new-msg"><i class="fa fa-edit"></i>写纸条</a>
             </div>
             <div class="operation-del hide clear">
