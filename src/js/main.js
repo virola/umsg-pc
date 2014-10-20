@@ -18,6 +18,12 @@ $(function () {
         $(item).attr('href', url);
     });
 
+    $('.weixin').on('mouseover', function () {
+        $(this).children('div').show();
+    }).on('mouseout', function () {
+        $(this).children('div').hide();
+    });
+
     // scroll top
     var scrollDom = $('#scrolltop');
     $(window).on('scroll', function () {
@@ -30,7 +36,7 @@ $(function () {
         }
     });
     scrollDom.on('click', function () {
-        $(document.body).animate({scrollTop: 0});
+        $(document.body).animate({scrollTop: 0}, 'fast');
     });
 
     $('.msg-list-item').on('mouseover', function () {
