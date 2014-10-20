@@ -77,7 +77,8 @@ module.exports = function (grunt) {
                         'src/js/common/Dialog.js',
                         'src/js/common/util.js',
                         'src/js/main.js',
-                        'src/js/content.js'
+                        'src/js/content.js',
+                        'src/js/msgForm.js'
                     ]
                 }
             }

@@ -98,3 +98,35 @@
         
     }
 }
+
+.side .fixed {
+    position: fixed;
+    width: 150px;
+    top: 0;
+    overflow: hidden;
+    -webkit-animation-name: dropdown;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease;
+    -moz-animation-name: dropdown;
+    -moz-animation-duration: 0.5s;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: ease;
+}
+
+@-webkit-keyframes dropdown {  
+    0%  {
+        -webkit-transform: translate(0, -100%);
+    }  
+    100% {
+        -webkit-transform: translate(0, 0);
+    }
+}
+@-moz-keyframes dropdown {  
+    0%  {
+        -moz-transform: translate(0, -100%);  
+    }  
+    100% {
+        -moz-transform: translate(0, 0);
+    }
+}

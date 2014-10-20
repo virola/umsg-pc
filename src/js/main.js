@@ -5,6 +5,8 @@
 var util = window.util || {};
 var pageParams = window.pageParams || {};
 
+
+// common interactions
 $(function () {
 
     /**
@@ -38,6 +40,40 @@ $(function () {
     scrollDom.on('click', function () {
         $(document.body).animate({scrollTop: 0}, 'fast');
     });
+
+    // side fixed
+    var mainDom = $('.main');
+    var mainHeight = mainDom.height();
+    var sideFixed = $('.side .appl');
+    var scrollGap = sideFixed.offset().top + sideFixed.outerHeight();
+    var timerSide;
+    $(window).on('scroll', function () {
+        var scrollTop = $(window).scrollTop();
+
+        if (scrollTop > scrollGap) {
+            if (timerSide) {
+                clearTimeout(timerSide);
+            }
+
+            timerSide = setTimeout(function () {
+                var scrollTop = $(window).scrollTop();
+                // var sideT = sideFixed.offset().top;
+
+                if (scrollTop > scrollGap) {
+                    sideFixed.addClass('fixed');
+                }
+            }, 500);
+        }
+        else {
+            sideFixed.removeClass('fixed');
+        }
+    });
+
+});
+
+
+// content interactions
+$(function () {
 
     $('.msg-list-item').on('mouseover', function () {
         $(this).addClass('item-hover');
@@ -150,6 +186,9 @@ $(function () {
         }
     }
 
+
+
+
     /**
      * 写纸条的处理逻辑
      */
@@ -258,32 +297,5 @@ $(function () {
     });
 
 });
-
-
-/**
- * 写纸条的交互逻辑模块
- * 
- * @type {Object}
- */
-var newMsgModule = (function () {
-    var msgForm = $('#new-msg-form');
-    var touserBox = msgForm.find('.inputbox-username');
-    var addInput = msgForm.find('#add-input');
-    var textarea = msgForm.find('textarea');
-    var sendBtn = msgForm.find('#btn-send');
-
-    function bindSend() {
-        sendBtn.on('click', function () {
-            // todo $.ajax({});
-        });
-    }
-
-    return {
-        init: function () {
-            bindSend();
-        }
-    };
-
-})();
 
 
