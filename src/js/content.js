@@ -137,7 +137,7 @@ $(function () {
     
     var confirmDialog;
 
-    // messaga delete
+    // message delete
     $('.btn-delpm-confirm').on('click', function () {
         if (confirmDialog) {
             confirmDialog.show();
