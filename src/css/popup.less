@@ -89,27 +89,13 @@
         color: #999;
     }
 
-    .textbox, .inputbox {
+    .textbox {
         border-radius: 2px;
         border: 1px solid #e8e8e8;
 
         &:focus {
             border-color: @em-color;
         }
-    }
-
-    .inputbox {
-        margin-bottom: 5px;
-        padding: 2px;
-        box-shadow: 0px 1px 1px 0px #eaeaea inset;
-        line-height: 17px;
-
-        .btn-deltags {
-            margin: 1px 2px 1px 0;
-        }
-    }
-    .inputbox-focus {
-        border-color: #00a0b0;
     }
 
     .input {
@@ -164,6 +150,7 @@
 }
 
 .suggest-wrap {
+    display: none;
     position: absolute;
     top: 26px;
     background: #fff;

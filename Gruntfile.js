@@ -76,6 +76,7 @@ module.exports = function (grunt) {
                     'asset/js/main.js': [
                         'src/js/common/Dialog.js',
                         'src/js/common/util.js',
+                        'src/js/common/jquery.tagsinput.js',
                         'src/js/main.js',
                         'src/js/content.js',
                         'src/js/msgForm.js'

@@ -76,7 +76,8 @@ $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/
 
             <div class="operation clear">
                 <a class="btn btn-default" href="javascript:;" id="btn-batch-del">批量删除</a>
-                <a class="btn btn-default" href="javascript:;" id="btn-search">搜索对话</a>
+                <a class="btn btn-default" href="javascript:;" id="btn-adduser" data-command="adduser"><i class="fa fa-plus"></i>邀请用户</a>
+                <a class="btn btn-default hide" href="javascript:;" id="btn-search">搜索对话</a>
                 <a class="btn btn-default fr" href="javascript:;" data-command="userban" data-value="{uid:'<?php echo $tuser['userid'] ?>',username:'<?php echo $tuser['username'] ?>'}"><i class="fa fa-ban block-ico"></i>屏蔽用户</a>
             </div>
             <div class="operation-del hide clear">
@@ -145,6 +146,27 @@ $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/
     
     </div>
 
+</div>
+
+<div class="user-manage popup" id="popup-user-manage">
+    <h2 class="popup-title">会话用户</h2>
+    <div class="popup-content">
+
+        <form action="#" onsubmit="return false;">
+            <p class="msg-tit">邀请用户加入会话：</p>
+            <div class="msg-con clear">
+                <div class="inputbox">
+                    <input type="text" class="text input" id="add-input" />
+                </div>
+            </div>
+        </form>
+
+        <div class="btn-line clear">
+            <a id="btn-send" class="btn btn-primary btn-noloading" href="javascript:;">确定</a>
+        </div> 
+    </div>
+
+    <a class="close" href="javascript:;"><i class="fa fa-times"></i></a>
 </div>
 
 <?php include('./common/footer.php') ?>

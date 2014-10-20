@@ -23,6 +23,19 @@ var newMsgModule = (function () {
     return {
         init: function () {
             bindSend();
+
+            addInput.tagsInput({
+                width: 'auto',
+                height: 'auto',
+                defaultText: addInput.attr('placeholder') || '请输入对方用户名',
+                placeholderColor: '#999',
+                onChange: function (ele, eleTags) {
+
+                },
+
+                // autocomplete_url: ''
+                
+            });
         }
     };
 

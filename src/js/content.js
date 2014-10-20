@@ -216,3 +216,28 @@ $(function () {
     var appl = $('.appl');
 
 });
+
+
+// 会话用户管理
+var userModule = (function () {
+    var exports = {};
+
+    var manageDialog = $('.user-manage');
+
+    function bindEvents() {
+        $('#btn-adduser').on('click', function () {
+
+        });
+    }
+
+    exports.init = function () {
+        bindEvents();
+    };
+
+    return exports;
+})();
+
+$(function () {
+    userModule.init();
+});
+
