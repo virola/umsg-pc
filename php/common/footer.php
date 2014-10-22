@@ -54,4 +54,5 @@ var pageParams = {
 };
 </script>
 <script src="../dep/jquery/dist/jquery.min.js"></script>
+<script src="../dep/jquery-ui/jquery-ui.min.js"></script>
 <script src="../asset/js/main.js"></script>

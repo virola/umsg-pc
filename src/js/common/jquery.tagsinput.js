@@ -78,7 +78,7 @@
 	    input.css('width', minWidth);
   	};
   
-	$.fn.addTag = function(value,options) {
+	$.fn.addTag = function (value, options) {
 		options = jQuery.extend({focus:false,callback:true},options);
 		this.each(function() { 
 			var id = $(this).attr('id');
@@ -173,7 +173,7 @@
 	$.fn.importTags = function(str) {
         id = $(this).attr('id');
 		$('#'+id+'-tagsinput .tag').remove();
-		$.fn.tagsInput.importTags(this,str);
+		$.fn.tagsInput.importTags(this, str);
 	}
 		
 	$.fn.tagsInput = function(options) { 
@@ -239,36 +239,43 @@
 				$(data.fakeInput).css('color', settings.placeholderColor);
 		        $(data.fakeInput).resetAutosize(settings);
 		
-				$(data.holder).bind('click',data,function(event) {
+				$(data.holder).bind('click', data, function (event) {
 					$(event.data.fakeInput).focus();
 				});
 			
-				$(data.fakeInput).bind('focus', data, function(event) {
+				$(data.fakeInput).bind('focus', data, function (event) {
 					$(event.data.holder).addClass('tagsinput-focus');
 					if ($(event.data.fakeInput).val() == $(event.data.fakeInput).attr('data-default')) { 
 						$(event.data.fakeInput).val('');
 					}
 					$(event.data.fakeInput).css('color','#000000');		
 				});
+				$(data.fakeInput).bind('blur', data, function (event) {
+					$(event.data.holder).removeClass('tagsinput-focus');
+				});
 						
 				if (settings.autocompleteUrl != undefined) {
-					autocompleteOptions = {source: settings.autocompleteUrl};
+					var autocompleteOptions = {source: settings.autocompleteUrl};
 					for (attrname in settings.autocomplete) { 
 						autocompleteOptions[attrname] = settings.autocomplete[attrname]; 
 					}
 				
 					if (jQuery.Autocompleter !== undefined) {
 						$(data.fakeInput).autocomplete(settings.autocompleteUrl, settings.autocomplete);
-						$(data.fakeInput).bind('result',data,function(event,data,formatted) {
+						$(data.fakeInput).bind('result', data, function(event, data,formatted) {
 							if (data) {
 								$('#'+id).addTag(data[0] + '',{focus:true,unique:(settings.unique)});
 							}
 					  	});
 					} else if (jQuery.ui.autocomplete !== undefined) {
 						$(data.fakeInput).autocomplete(autocompleteOptions);
-						$(data.fakeInput).bind('autocompleteselect',data,function(event,ui) {
+						$(data.fakeInput).bind('autocompleteselect', data, function (event, ui) {
 							$(event.data.realInput).addTag(ui.item.value,{focus:true,unique:(settings.unique)});
 							return false;
+						});
+
+						$(data.fakeInput).bind('focusin', data, function (event, ui) {
+							$(event.data.fakeInput).autocomplete('search', $(event.data.fakeInput).val());
 						});
 					}
 				
@@ -276,16 +283,23 @@
 				} else {
 						// if a user tabs out of the field, create a new tag
 						// this is only available if autocomplete is not used.
-						$(data.fakeInput).bind('blur',data,function(event) { 
+						$(data.fakeInput).bind('blur', data, function (event) { 
 							var d = $(this).attr('data-default');
-							if ($(event.data.fakeInput).val()!='' && $(event.data.fakeInput).val()!=d) { 
-								if ( (event.data.minChars <= $(event.data.fakeInput).val().length) && (!event.data.maxChars || (event.data.maxChars >= $(event.data.fakeInput).val().length)) )
-									$(event.data.realInput).addTag($(event.data.fakeInput).val(),{focus:true,unique:(settings.unique)});
-							} else {
-								$(event.data.fakeInput).val($(event.data.fakeInput).attr('data-default'));
-								$(event.data.fakeInput).css('color',settings.placeholderColor);
+							var fakeInput = $(event.data.fakeInput);
+							if (fakeInput.val() != '' && fakeInput.val() != d) { 
+								if ( (event.data.minChars <= fakeInput.val().length) 
+									&& (!event.data.maxChars || (event.data.maxChars >= fakeInput.val().length)) 
+								) {
+									$(event.data.realInput).addTag(fakeInput.val(), { 
+										focus: true,
+										unique: (settings.unique)
+									});
+								}
+							} 
+							else {
+								fakeInput.val(fakeInput.attr('data-default'));
+								fakeInput.css('color',settings.placeholderColor);
 							}
-							$(event.data.holder).removeClass('tagsinput-focus');
 							return false;
 						});
 				
