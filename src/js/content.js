@@ -154,7 +154,7 @@ $(function () {
 
                     if (checkedVal.length) {
                         $.post(pageParams.ajaxUrl.delMsgBatch, {
-                            data: checkedVal
+                            'message_id': checkedVal.join(',')
                         }, function (resp) {
                             // success
                             window.location.reload();

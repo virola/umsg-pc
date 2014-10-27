@@ -14,6 +14,7 @@ var newMsgModule = (function () {
     var addInput = msgForm.find('#add-input');
     var textarea = msgForm.find('textarea');
     var sendBtn = msgForm.find('#btn-send');
+    var sugSource = msgForm.find('.suggest-wrap>li');
 
     function bindSend() {
         sendBtn.on('click', function () {
@@ -49,14 +50,20 @@ var newMsgModule = (function () {
             }
 
             var data = {
-                username: users.join(','),
+                'user_name': users.join(','),
                 content: content
             };
 
             var url = pageParams.ajaxUrl.postMessage;
             if (!failed) {
                 $.post(url, data, function (resp) {
+                    addInput.importTags('');
+                    textarea.val('');
 
+                    // close dialog
+                    msgForm.find('.close').trigger('click');
+                }, function (resp) {
+                    // fail
                 }, 'json');
             }
         });
@@ -67,6 +74,9 @@ var newMsgModule = (function () {
     }
 
     function initTagInput() {
+        var data = $.map(sugSource, function (item, i) {
+            return $(item).text();
+        });
         addInput.tagsInput({
             width: 'auto',
             height: 'auto',
@@ -76,7 +86,7 @@ var newMsgModule = (function () {
                 touserBox.find('.tagsinput').removeClass('input-invalid');
             },
             autocomplete: {
-                source: ['有节操', 'Luna很纠结', '小甜腥', '有拍管理员', 'admin'],
+                source: data,
                 minLength: 0,
                 position: {
                     my: 'left top+2'

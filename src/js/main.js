@@ -273,7 +273,7 @@ $(function () {
 
                     var url = pageParams.ajaxUrl.delTalkBatch;
                     $.post(url, {
-                        data: checkedVal
+                        'talk_id': checkedVal.join(',')
                     }, function (resp) {
                         // success
                         window.location.reload();
