@@ -49,7 +49,8 @@ var pageParams = {
         delMsgBatch: '#',
         postMessage: '#',
 
-        banUserBatch: '#'
+        banUserBatch: '#',
+        addTalkUserBatch: '#talkuser'
     },
     isNew: '<?php echo $showPopup?>',
     tousername: '<?php echo $tuser['username']?>'

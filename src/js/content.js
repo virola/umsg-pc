@@ -191,12 +191,10 @@ $(function () {
             url: url,
             data: {
                 content: content
-            },
-            dataType: 'json',
-            success: function (data) {
-                if (data && data.status === 0) {
-                    window.location.reload();
-                }
+            }
+        }).done(function (resp) {
+            if (resp) {
+                window.location.reload();
             }
         });
 

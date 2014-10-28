@@ -148,26 +148,48 @@ $project = 'http://'.$_SERVER['REMOTE_ADDR'].':'.$_SERVER['SERVER_PORT'].'/umsg/
 
 </div>
 
-<div class="user-manage popup" id="popup-user-manage">
-    <h2 class="popup-title">会话用户</h2>
-    <div class="popup-content">
 
-        <form action="#" onsubmit="return false;">
-            <p class="msg-tit">邀请用户加入会话：</p>
-            <div class="msg-con clear">
-                <div class="inputbox">
-                    <input type="text" class="text input" id="add-input" />
-                </div>
+<div class="popup" id="popup-talkuser-manage">
+    <h2 class="popup-title">邀请用户加入会话</h2>
+    <div class="popup-content black-form talkuser-form" id="talkuser-manage-form">
+
+        <div class="form-line clear">
+            <div class="input-box fl">
+                <input id="add-talkuser-input" class="text input">
             </div>
-        </form>
-
+            <a href="javascript:;" class="btn btn-default fr" id="add-talkuser-btn">添加</a>
+        </div>
+        <div class="form-line clear">
+            <p class="black-form-info">当前会话用户 2 个</p>
+            <ul class="black-list clear">
+                <li>
+                    <div class="user-head fl"><img src="http://127.0.0.1:8008/umsg/static/asset/img/temp/user_1.jpg"></div>
+                    <div class="li-info fl">
+                        <h4 class="title">有节操</h4>
+                        <div class="li-btn">
+                            <a href="javascript:void(0);" data-command="deluser" data-value="{uids:2028810631,username:'有节操'}" class="btn-small">删除用户</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="user-head fl"><img src="#"></div>
+                    <div class="li-info fl">
+                        <h4 class="title">小甜心</h4>
+                        <div class="li-btn">
+                            <a href="javascript:void(0);" data-command="deluser" data-value="{uids:2028810631,username:'小甜心'}" class="btn-small">删除用户</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
         <div class="btn-line clear">
-            <a id="btn-send" class="btn btn-primary btn-noloading" href="javascript:;">确定</a>
-        </div> 
+            <a id="btn-close" class="btn btn-default popup-close" href="javascript:;">关闭</a>
+        </div>            
     </div>
 
     <a class="close" href="javascript:;"><i class="fa fa-times"></i></a>
 </div>
+
 
 <?php include('./common/footer.php') ?>
 </body>

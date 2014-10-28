@@ -115,7 +115,10 @@ var newMsgModule = (function () {
 
 })();
 
-
+/**
+ * 黑名单管理逻辑模块
+ * @type {Object}
+ */
 var blackModule = (function () {
     var msgForm = $('#black-manage-form');
     var adduserBox = msgForm.find('.inputbox');
@@ -169,8 +172,70 @@ var blackModule = (function () {
     return exports;
 })();
 
+
+
+/**
+ * 会话用户管理逻辑模块
+ * @type {Object}
+ */
+var talkUserModule = (function () {
+    var msgForm = $('#talkuser-manage-form');
+    var adduserBox = msgForm.find('.inputbox');
+    var addInput = msgForm.find('#add-talkuser-input');
+    var addBtn = msgForm.find('#add-talkuser-btn');
+
+    var exports = {};
+
+    function initTagInput() {
+        addInput.tagsInput({
+            width: 'auto',
+            height: 'auto',
+            defaultText: addInput.attr('placeholder') || '输入用户名',
+            placeholderColor: '#999',
+            onAddTag: function () {
+                adduserBox.find('.tagsinput').removeClass('input-invalid');
+            }
+        });
+    }
+
+    function bind() {
+        var url = pageParams.ajaxUrl.addTalkUserBatch;
+        addBtn.on('click', function () {
+            var users = addInput.val();
+            if (!users) {
+                return false;
+            }
+
+            $.post(url, {
+                'user_name': users
+            }).done(function (resp) {
+                // todo
+                addInput.importTags('');
+                // console.log(resp);
+            }).fail(function (resp) {
+                // todo
+            });
+
+            return false;
+        });
+    }
+
+    exports.init = function () {
+        if (msgForm.size() > 0) {
+            initTagInput();
+            bind();
+        }
+        
+    };
+
+
+    return exports;
+})();
+
+
 $(function () {
 
     newMsgModule.init();
     blackModule.init();
+    talkUserModule.init();
 });

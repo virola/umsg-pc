@@ -1,4 +1,32 @@
 .pager {
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+
+
+    a, span {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        margin-left: 4px;
+        padding: 0 8px;
+        height: 26px;
+        line-height: 26px;
+        border: 1px solid #ddd;
+        background: #fff no-repeat;
+        color: #333;
+        font-size: 12px;
+    }
+
+    .current {
+        border-color: #0bafbf;
+        background-color: #0bafbf;
+        color: #fff;
+        font-weight: 700;
+    }
+}
+/*
+.pager {
     p {
         padding: 20px;
 
@@ -40,4 +68,4 @@
             }
         }
     }
-}
+}*/

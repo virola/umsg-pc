@@ -186,6 +186,25 @@ $(function () {
                 modal: true
             });
         }
+
+        // 屏蔽用户管理
+        if (command == 'adduser') {
+            util.showPopup('talkuser-manage', {
+                width: 540,
+                modal: true
+            });
+        }
+
+        // unblock
+        if (command == 'unblock') {
+            url = pageParams.ajaxUrl.unblockUser;
+            $.post(url, val).done(function (resp) {
+                if (parseInt(resp, 10) == 1) {
+                    // success
+                    target.closest('li').remove();
+                }
+            });
+        }
     }
 
 
