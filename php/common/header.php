@@ -10,7 +10,7 @@
         <!--个人信息-->
         <div class="fr">
             <a href="space-uid-120380.html" target="_blank" title="访问我的空间" id="umnav" class="username">virola</a>
-            <a class="userCenter ico" href="http://my.94uv.com/userCenter/userInfo.html">个人中心</a>
+            <a class="user-center ico" href="http://my.94uv.com/userCenter/userInfo.html">个人中心</a>
             <a class="message ico showmenu" href="/home.php?mod=space&amp;do=pm">消息(99+)</a>
             <a class="logout" href="http://my.94uv.com/userCenter/logout.html">安全退出</a>
             <a class="sina ico" title="点击进入潇湘晨报微博" href="http://weibo.com/xxcb" target="_blank"></a>

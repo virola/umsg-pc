@@ -65,7 +65,7 @@ $mod = 'note';
             <div class="operation clear">
                 <a class="btn btn-default" href="javascript:;" id="btn-batch-del">批量删除</a>
                 <a class="btn btn-default" href="javascript:;" id="btn-mark-read" data-command="markread" data-url="#">全部标记已读</a>
-                <a class="btn btn-default" href="javascript:;" id="btn-blackuser" data-comman="blackmanage"><i class="fa fa-ban block-ico"></i>屏蔽用户</a>
+                <a class="btn btn-default" href="javascript:;" id="btn-blackuser" data-command="blackmanage"><i class="fa fa-ban block-ico"></i>屏蔽用户</a>
                 <a class="btn btn-primary fr popup-trigger" href="#" data-id="new-msg"><i class="fa fa-edit"></i>写纸条</a>
             </div>
             <div class="operation-del hide clear">
@@ -138,6 +138,48 @@ $mod = 'note';
 
     <a class="close" href="javascript:;"><i class="fa fa-times"></i></a>
 </div>
+
+<div class="popup" id="popup-black-manage">
+    <h2 class="popup-title">屏蔽纸条</h2>
+    <div class="popup-content black-form" id="black-manage-form">
+
+        <div class="form-line clear">
+            <div class="input-box fl">
+                <input id="add-black-input" class="text input">
+            </div>
+            <a href="javascript:;" class="btn btn-default fr" id="add-black-btn">添加</a>
+        </div>
+        <div class="form-line clear">
+            <p class="black-form-info">已屏蔽用户2个</p>
+            <ul class="black-list clear">
+                <li>
+                    <div class="user-head fl"><img src="http://127.0.0.1:8008/umsg/static/asset/img/temp/user_1.jpg"></div>
+                    <div class="li-info fl">
+                        <h4 class="title">新浪</h4>
+                        <div class="li-btn">
+                            <a href="javascript:void(0);" data-command="unblock" data-value="{uids:2028810631,username:'新浪'}" class="btn-small">解除屏蔽</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="user-head fl"><img src="http://127.0.0.1:8008/umsg/static/asset/img/temp/user_1.jpg"></div>
+                    <div class="li-info fl">
+                        <h4 class="title">新浪22222</h4>
+                        <div class="li-btn">
+                            <a href="javascript:void(0);" data-command="unblock" data-value="{uids:2028810631,username:'新浪'}" class="btn-small">解除屏蔽</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="btn-line clear">
+            <a id="btn-close" class="btn btn-default popup-close" href="javascript:;">关闭</a>
+        </div>            
+    </div>
+
+    <a class="close" href="javascript:;"><i class="fa fa-times"></i></a>
+</div>
+
 
 <?php include('./common/footer.php') ?>
 </body>

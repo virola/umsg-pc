@@ -78,6 +78,10 @@ var util = (function () {
             top: top + 'px'
         });
 
+        if (options.width > 0) {
+            target.css('width', options.width + 'px')
+        }
+
         if (options.modal) {
             var mask = $('<div/>').addClass('mask').css({
                 width: $(window).width() + 'px',

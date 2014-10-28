@@ -181,8 +181,10 @@ $(function () {
 
         // 屏蔽用户管理
         if (command == 'blackmanage') {
-            // todo 
-            // 弹出层
+            util.showPopup('black-manage', {
+                width: 540,
+                modal: true
+            });
         }
     }
 
@@ -195,7 +197,7 @@ $(function () {
     $('.popup-trigger').on('click', function () {
         util.showPopup($(this).attr('data-id'), {
             title: '写纸条',
-            width: 440,
+            width: 450,
             modal: true
         });
         return false;
@@ -205,7 +207,7 @@ $(function () {
     if (pageParams.isNew > 0) {
         util.showPopup('new-msg', {
             title: '写纸条',
-            width: 640,
+            width: 450,
             modal: true
         });
 
@@ -214,7 +216,7 @@ $(function () {
         }
     }
 
-    $('.popup .close').on('click', function () {
+    $('.popup .close, .popup .popup-close').on('click', function () {
         $(this).closest('.popup').hide();
         $('.mask').remove();
     });

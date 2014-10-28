@@ -16,8 +16,14 @@ var newMsgModule = (function () {
     var sendBtn = msgForm.find('#btn-send');
     var sugSource = msgForm.find('.suggest-wrap>li');
 
+    var isPosting;
+
     function bindSend() {
+
         sendBtn.on('click', function () {
+            if (isPosting) {
+                return;
+            }
             var failed;
 
             var fakeInput = touserBox.find('.tagsinput input');
@@ -56,15 +62,19 @@ var newMsgModule = (function () {
 
             var url = pageParams.ajaxUrl.postMessage;
             if (!failed) {
-                $.post(url, data, function (resp) {
-                    addInput.importTags('');
-                    textarea.val('');
-
-                    // close dialog
-                    msgForm.find('.close').trigger('click');
-                }, function (resp) {
-                    // fail
-                }, 'json');
+                sendBtn.text('发送中...');
+                isPosting = 1;
+                
+                $.post(url, data)
+                    .done(function (resp) {
+                        isPosting = 0;
+                        window.location.reload();
+                    })
+                    .fail(function (resp) {
+                        // fail
+                        isPosting = 0;
+                        sendBtn.text('发送');
+                    });
             }
         });
 
@@ -106,7 +116,61 @@ var newMsgModule = (function () {
 })();
 
 
+var blackModule = (function () {
+    var msgForm = $('#black-manage-form');
+    var adduserBox = msgForm.find('.inputbox');
+    var addInput = msgForm.find('#add-black-input');
+    var addBtn = msgForm.find('#add-black-btn');
+
+    var exports = {};
+
+    function initTagInput() {
+        addInput.tagsInput({
+            width: 'auto',
+            height: 'auto',
+            defaultText: addInput.attr('placeholder') || '输入用户名',
+            placeholderColor: '#999',
+            onAddTag: function () {
+                adduserBox.find('.tagsinput').removeClass('input-invalid');
+            }
+        });
+    }
+
+    function bind() {
+        var url = pageParams.ajaxUrl.banUserBatch;
+        addBtn.on('click', function () {
+            var users = addInput.val();
+            if (!users) {
+                return false;
+            }
+
+            $.post(url, {
+                'user_name': users
+            }).done(function (resp) {
+                // todo
+                addInput.importTags('');
+            }).fail(function (resp) {
+                // todo
+            });
+
+            return false;
+        });
+    }
+
+    exports.init = function () {
+        if (msgForm.size() > 0) {
+            initTagInput();
+            bind();
+        }
+        
+    };
+
+
+    return exports;
+})();
+
 $(function () {
 
     newMsgModule.init();
+    blackModule.init();
 });
