@@ -140,6 +140,7 @@ var blackModule = (function () {
     }
 
     function bind() {
+        var isPosting;
         var url = pageParams.ajaxUrl.banUserBatch;
         addBtn.on('click', function () {
             var users = addInput.val();
@@ -147,16 +148,26 @@ var blackModule = (function () {
                 return false;
             }
 
+            if (isPosting) {
+                return false;
+            }
+
+            isPosting = 1;
+
             $.post(url, {
                 'user_name': users
             }).done(function (resp) {
-                // todo
-                addInput.importTags('');
+                isPosting = 0;
+                if (parseInt(resp, 10) == 1) {
+                    addInput.importTags('');
+
+                    // todo
+                }
+                
             }).fail(function (resp) {
-                // todo
+                isPosting = 0;
             });
 
-            return false;
         });
     }
 
@@ -199,21 +210,33 @@ var talkUserModule = (function () {
     }
 
     function bind() {
+        var isPosting;
         var url = pageParams.ajaxUrl.addTalkUserBatch;
+        
         addBtn.on('click', function () {
             var users = addInput.val();
             if (!users) {
                 return false;
             }
 
+            if (isPosting) {
+                return false;
+            }
+
+            isPosting = 1;
+
             $.post(url, {
                 'user_name': users
             }).done(function (resp) {
-                // todo
-                addInput.importTags('');
-                // console.log(resp);
+                isPosting = 0;
+                if (parseInt(resp, 10) == 1) {
+                    addInput.importTags('');
+
+                    // todo
+                }
+                
             }).fail(function (resp) {
-                // todo
+                isPosting = 0;
             });
 
             return false;
