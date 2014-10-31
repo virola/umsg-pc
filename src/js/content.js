@@ -43,23 +43,27 @@ var listModule = (function () {
             url: url,
             dataType: 'json',
             success: function (json) {
-                setTimeout(function () {
+                isAjax = 0;
+                if (json && json.list && (json.list instanceof Array)) {
+                    var list = json.list;
 
-                    isAjax = 0;
-                    
-                    if (json.status === 0) {
-                        renderList(json.data.list || []);
-                        loading.success();
-                        if (json.data.loadend) {
-                            isLoadend = 1;
-                            loading.complete();
-                        }
+                    renderList(list || []);
+                    loading.success();
+
+                    if (json['page_total'] === false) {
+                        isLoadend = 1;
+                        loading.complete();
                     }
-                }, 1000);
+                }
+                else {
+                    loading.success();
+                    page--;
+                }
                 
             },
             failure: function () {
                 isAjax = 0;
+                page--;
             }
         });
     }
@@ -70,8 +74,11 @@ var listModule = (function () {
         +         '<legend class="time-title">#{dateline}</legend>'
         +     '</fieldset>'
         +     '<section class="#{talkStyle} clear">'
-        +         '<a class="avatar-talk user-avator" href="#{url}" title="#{username}">'
-        +             '<img class="avator-round" src="#{avator}">'
+        +         '<a class="avatar-talk user-avator" ' 
+        +           'href="http://xiaozu.94uv.com/home.php?mod=space&uid=#{userid}&do=profile" title="#{username}">'
+        +             '<img class="avator-round" ' 
+        +               'src="http://my.94uv.com/?app=user&func=getAvatar&pro=uv&user_id=#{userid}&type=small">'
+        +             '<span>#{username}</span>'
         +         '</a>'
         +         '<div class="content-talk">'
         +             '<div class="msg-arrow">'
@@ -88,16 +95,25 @@ var listModule = (function () {
     function renderList(list) {
         var html = [];
         $.each(list, function (i, data) {
-            data.talkStyle = 'guest-talk';
-            if (data.issend) {
-                data.talkStyle = 'me-talk';
+            var talkStyle = 'guest-talk';
+            if (data.isOwner) {
+                talkStyle = 'me-talk';
             }
-            data.delStyle = 'hide';
+            var delStyle = 'hide';
             if (isDelMode) {
-                data.delStyle = '';
+                delStyle = '';
             }
 
-            html[i] = util.format(_tpl, data);
+            html[i] = util.format(_tpl, {
+                dateline: data['insert_time'],
+                talkStyle: talkStyle,
+                delStyle: delStyle,
+                pmid: data['message_id'],
+                content: data['content'],
+                username: data['insert_name'],
+                avator: data['avator'],
+                userid: data['insert_id']
+            });
         });
 
         talkList.append(html.join(''));

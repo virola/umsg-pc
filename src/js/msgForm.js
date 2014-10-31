@@ -3,6 +3,7 @@
  */
 
 var pageParams = window.pageParams || {};
+var util = window.util || {};
 /**
  * 写纸条的交互逻辑模块
  * 
@@ -124,6 +125,8 @@ var blackModule = (function () {
     var adduserBox = msgForm.find('.inputbox');
     var addInput = msgForm.find('#add-black-input');
     var addBtn = msgForm.find('#add-black-btn');
+    var manageList = msgForm.find('.black-list');
+    var manageInfo = msgForm.find('.black-form-info');
 
     var exports = {};
 
@@ -138,6 +141,20 @@ var blackModule = (function () {
             }
         });
     }
+
+    var tpl = ''
+        + '<li>'
+        +     '<div class="user-head fl">' 
+        +       '<img src="http://my.94uv.com/?app=user&func=getAvatar&pro=uv&user_id=#{1}&type=middle"></div>'
+        +     '<div class="li-info fl">'
+        +         '<h4 class="title">#{0}</h4>'
+        +         '<div class="li-btn">'
+        +             '<a href="javascript:void(0);" data-command="unblock" ' 
+        +             'data-value="{black_id:#{1},username:\'#{0}\'}" class="btn-small">解除屏蔽</a>'
+        +         '</div>'
+        +     '</div>'
+        + '</li>'
+    ;
 
     function bind() {
         var isPosting;
@@ -154,16 +171,31 @@ var blackModule = (function () {
 
             isPosting = 1;
 
-            $.post(url, {
-                'user_name': users
+            $.ajax({
+                type: 'post',
+                url: url, 
+                data: {
+                    'user_name': users
+                }, 
+                dataType: 'json'
             }).done(function (resp) {
                 isPosting = 0;
-                if (parseInt(resp, 10) == 1) {
+                var manageCount = parseInt(manageInfo.find('i').text(), 10);
+
+                if (resp && resp.status == 1) {
                     addInput.importTags('');
 
-                    // todo
+                    var user = resp.username;
+                    var html = '';
+                    var count = 0;
+                    $.each(user, function (key, item) {
+                        html += util.format(tpl, item, key);
+                        manageCount++;
+                    });
+
+                    manageInfo.find('i').text(manageCount);
+                    manageList.append(html);
                 }
-                
             }).fail(function (resp) {
                 isPosting = 0;
             });
@@ -194,6 +226,8 @@ var talkUserModule = (function () {
     var adduserBox = msgForm.find('.inputbox');
     var addInput = msgForm.find('#add-talkuser-input');
     var addBtn = msgForm.find('#add-talkuser-btn');
+    var manageList = msgForm.find('.black-list');
+    var manageInfo = msgForm.find('.black-form-info');
 
     var exports = {};
 
@@ -208,6 +242,20 @@ var talkUserModule = (function () {
             }
         });
     }
+
+    var tpl = ''
+        + '<li>'
+        +     '<div class="user-head fl">' 
+        +       '<img src="http://my.94uv.com?app=user&func=getAvatar&pro=uv&user_id=#{1}&type=middle"></div>'
+        +     '<div class="li-info fl">'
+        +         '<h4 class="title">#{0}</h4>'
+        +         '<div class="li-btn">'
+        +             '<a href="javascript:void(0);" data-command="deluser" ' 
+        +               'data-value="{user_id:#{1},username:\'#{0}\'}" class="btn-small">删除用户</a>'
+        +         '</div>'
+        +     '</div>'
+        + '</li>'
+    ;
 
     function bind() {
         var isPosting;
@@ -225,16 +273,31 @@ var talkUserModule = (function () {
 
             isPosting = 1;
 
-            $.post(url, {
-                'user_name': users
+            $.ajax({
+                type: 'post',
+                url: url, 
+                data: {
+                    'user_name': users
+                }, 
+                dataType: 'json'
             }).done(function (resp) {
                 isPosting = 0;
-                if (parseInt(resp, 10) == 1) {
+                var manageCount = parseInt(manageInfo.find('i').text(), 10);
+
+                if (resp && resp.status == 1) {
                     addInput.importTags('');
 
-                    // todo
+                    var user = resp.username;
+                    var html = '';
+                    var count = 0;
+                    $.each(user, function (key, item) {
+                        html += util.format(tpl, item, key);
+                        manageCount++;
+                    });
+
+                    manageInfo.find('i').text(manageCount);
+                    manageList.append(html);
                 }
-                
             }).fail(function (resp) {
                 isPosting = 0;
             });

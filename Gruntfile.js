@@ -80,7 +80,8 @@ module.exports = function (grunt) {
                         'src/js/main.js',
                         'src/js/content.js',
                         'src/js/msgForm.js'
-                    ]
+                    ],
+                    'asset/js/notice.js': ['src/js/common/notice.js']
                 }
             }
         },
@@ -92,7 +93,8 @@ module.exports = function (grunt) {
             },
             'page': {
                 files: {
-                    'asset/js/main.js': ['asset/js/main.js']
+                    'asset/js/main.js': ['asset/js/main.js'],
+                    'asset/js/notice.js': 'asset/js/notice.js'
                 }
             }
         },

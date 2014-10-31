@@ -39,6 +39,9 @@ $(function () {
     });
     scrollDom.on('click', function () {
         $(document.body).animate({scrollTop: 0}, 'fast');
+        if (navigator.userAgent.indexOf('Firefox') >= 0) {
+            $(document.documentElement).animate({scrollTop: 0}, 'fast');
+        }
     });
 
     // side fixed
@@ -135,7 +138,7 @@ $(function () {
         var url;
 
         if (command == 'talkdel') {
-            url = pageParams.ajaxUrl.banUser;
+            url = pageParams.ajaxUrl.delTalk;
             util.confirm({
                 modal: 1,
                 content: util.format(util.lang.index.talkDel, val.username),
@@ -149,7 +152,7 @@ $(function () {
         }
 
         if (command == 'userban') {
-            url = pageParams.ajaxUrl.delTalk;
+            url = pageParams.ajaxUrl.banUser;
 
             util.confirm({
                 modal: 1,
@@ -199,9 +202,24 @@ $(function () {
         if (command == 'unblock') {
             url = pageParams.ajaxUrl.unblockUser;
             $.post(url, val).done(function (resp) {
+                var cntDom = target.closest('.popup-content').find('.black-form-info>i');
                 if (parseInt(resp, 10) == 1) {
                     // success
                     target.closest('li').remove();
+                    cntDom.text(+cntDom.text() - 1);
+                }
+            });
+        }
+
+        // deluser
+        if (command == 'deluser') {
+            url = pageParams.ajaxUrl.delTalkUser;
+            $.post(url, val).done(function (resp) {
+                var cntDom = target.closest('.popup-content').find('.black-form-info>i');
+                if (parseInt(resp, 10) == 1) {
+                    // success
+                    target.closest('li').remove();
+                    cntDom.text(+cntDom.text() - 1);
                 }
             });
         }
