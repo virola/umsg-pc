@@ -305,15 +305,24 @@
 				
 				}
 				// if user types a comma, create a new tag
-				$(data.fakeInput).bind('keydown', data, function(event) {
+				$(data.fakeInput).bind('keyup', data, function(event) {
+					var fakeInput = $(event.data.fakeInput);
 					if (event.which == 188 || event.which == 186 || event.which==13 ) {
+						var val = fakeInput.val();
+						fakeInput.val(val.replace('，', '').replace('；', '').replace(/[,;]/, ''));
 					    event.preventDefault();
-						if ( (event.data.minChars <= $(event.data.fakeInput).val().length) && (!event.data.maxChars || (event.data.maxChars >= $(event.data.fakeInput).val().length)) )
-							$(event.data.realInput).addTag($(event.data.fakeInput).val(),{focus:true,unique:(settings.unique)});
-					  	$(event.data.fakeInput).resetAutosize(settings);
+						if ( (event.data.minChars <= fakeInput.val().length) && (!event.data.maxChars 
+							|| (event.data.maxChars >= fakeInput.val().length)) 
+						) {
+							$(event.data.realInput).addTag(fakeInput.val(),{
+								focus: true,
+								unique: (settings.unique)
+							});
+						}
+					  	fakeInput.resetAutosize(settings);
 						return false;
 					} else if (event.data.autosize) {
-			            $(event.data.fakeInput).doAutosize(settings);
+			            fakeInput.doAutosize(settings);
             
           			}
 				});
