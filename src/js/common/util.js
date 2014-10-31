@@ -71,16 +71,16 @@ var util = (function () {
         
         options = $.extend({}, options);
 
+        if (options.width > 0) {
+            target.css('width', options.width + 'px')
+        }
+
         var top = ($(window).height() - target.outerHeight()) / 2;
         var left = ($(window).width() - target.outerWidth()) / 2;
         target.css({
             left: left + 'px',
             top: top + 'px'
         });
-
-        if (options.width > 0) {
-            target.css('width', options.width + 'px')
-        }
 
         if (options.modal) {
             var mask = $('<div/>').addClass('mask').css({

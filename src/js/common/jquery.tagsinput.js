@@ -191,7 +191,7 @@
 	        placeholderColor: '#666666',
 	        autosize:  true,
 	        comfortZone:  20,
-	        inputPadding:  6*2,
+	        inputPadding:  6*2
 	    }, options);
 
 		this.each(function() { 

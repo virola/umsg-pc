@@ -30,7 +30,7 @@ module.exports = function (grunt) {
                     '-W014': true,
                     '-W102': true
                 },
-                src: ['src/**/*.js']
+                src: ['src/**/*.js', 'src/**/**/*.js']
             }
         },
 
@@ -59,14 +59,16 @@ module.exports = function (grunt) {
         'less': {
             'page': {
                 files: {
-                    'asset/css/main.css': 'src/css/main.less'
+                    'asset/css/main.css': 'src/css/main.less',
+                    'asset/css/ie7.css': 'src/css/extend/ie7.less'
                 }
             }
         },
         'cssmin': {
             'page': {
                 files: {
-                    'asset/css/main.css': 'asset/css/main.css'
+                    'asset/css/main.css': 'asset/css/main.css',
+                    'asset/css/ie7.css': 'asset/css/ie7.css'
                 }
             }
         },

@@ -1,0 +1,55 @@
+.btn {
+    display: inline;
+    zoom: 1;
+}
+
+.clear {
+    zoom: 1;
+}
+
+.msg-form {
+    .inputbox {
+        zoom: 1;
+    }
+}
+
+.tagsinput {
+    zoom: 1;
+}
+
+@import '../../../dep/font-awesome/less/variables';
+
+.ie7icon(@inner) { *zoom: ~"expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '@{inner}')"; }
+
+
+
+.fa-envelope {
+    .ie7icon('&#xf0e0;');
+}
+
+.fa-edit {
+    .ie7icon('&#xf044;');
+}
+
+.fa-comment-o {
+    .ie7icon('&#xf0e5;');
+}
+
+.fa-comments {
+    .ie7icon('&#xf086;');
+}
+.fa-ban {
+    .ie7icon('&#xf05e;');
+}
+.fa-angle-down {
+    .ie7icon('&#xf107;');
+}
+.fa-times {
+    .ie7icon('&#xf00d;');
+}
+.fa-user {
+    .ie7icon('&#xf007;');
+}
+.fa-search {
+    .ie7icon('&#xf002;');
+}
