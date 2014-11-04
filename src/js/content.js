@@ -75,9 +75,11 @@ var listModule = (function () {
         +     '</fieldset>'
         +     '<section class="#{talkStyle} clear">'
         +         '<a class="avatar-talk user-avator" ' 
-        +           'href="http://xiaozu.94uv.com/home.php?mod=space&uid=#{userid}&do=profile" title="#{username}">'
+        +           'href="http://xiaozu.' 
+        + pageParams.siteDomain + '/home.php?mod=space&uid=#{userid}&do=profile" title="#{username}">'
         +             '<img class="avator-round" ' 
-        +               'src="http://my.94uv.com/?app=user&func=getAvatar&pro=uv&user_id=#{userid}&type=small">'
+        +               'src="http://my.' 
+        + pageParams.siteDomain + '/?app=user&func=getAvatar&pro=uv&user_id=#{userid}&type=small">'
         +             '<span>#{username}</span>'
         +         '</a>'
         +         '<div class="content-talk">'
@@ -95,6 +97,11 @@ var listModule = (function () {
     function renderList(list) {
         var html = [];
         $.each(list, function (i, data) {
+            if (!data['message_id']) {
+                html[i] = '';
+                return;
+            }
+            
             var talkStyle = 'guest-talk';
             if (data.isOwner) {
                 talkStyle = 'me-talk';

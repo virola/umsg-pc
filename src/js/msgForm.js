@@ -69,7 +69,7 @@ var newMsgModule = (function () {
                 $.post(url, data)
                     .done(function (resp) {
                         isPosting = 0;
-                        window.location.reload();
+                        window.location.href = pageParams.homeurl;
                     })
                     .fail(function (resp) {
                         // fail

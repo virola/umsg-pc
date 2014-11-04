@@ -18,7 +18,8 @@ module.exports = function (grunt) {
         },
         cssmin: {
             options: {
-                banner: '/** <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> **/'
+                banner: '/** <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> **/',
+                compatibility: 'ie7'
             }
         },
         jshint: {

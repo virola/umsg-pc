@@ -4,8 +4,12 @@
 
 (function ($) {
     var domain = '94uv.com';
+    var domain = '94uv.com';
     if (window.location.href.indexOf('94uv.dev') > -1) {
         domain = '94uv.dev';
+    }
+    if (window.location.href.indexOf('94uv.test') > -1) {
+        domain = '94uv.test';
     }
     var url = 'http://zhitiao.' + domain + '/index.php?app=message&func=messageTotal';
 
